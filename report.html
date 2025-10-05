@@ -1,69 +1,57 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Report a Lost Item - YearnaZ</title>
-    <style>
-        body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-            background: linear-gradient(135deg, #6e8efb, #a777e3);
-            color: white;
-            margin: 0;
-            padding: 20px;
-            min-height: 100vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-        .container {
-            background: rgba(255, 255, 255, 0.1);
-            padding: 30px;
-            border-radius: 20px;
-            backdrop-filter: blur(10px);
-            text-align: center;
-            max-width: 500px;
-            width: 100%;
-        }
-        input, textarea {
-            width: 100%;
-            padding: 12px;
-            margin: 10px 0;
-            border-radius: 10px;
-            border: 1px solid rgba(255,255,255,0.3);
-            background: rgba(0,0,0,0.1);
-            color: white;
-        }
-        button {
-            background: #ff6b6b;
-            color: white;
-            border: none;
-            padding: 14px;
-            width: 100%;
-            border-radius: 14px;
-            font-size: 1.1rem;
-            margin-top: 15px;
-            cursor: pointer;
-        }
-        a {
-            display: inline-block;
-            margin-top: 20px;
-            color: rgba(255,255,255,0.9);
-            text-decoration: none;
-        }
-    </style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Report Lost Item - YearnaZ</title>
+  <style>
+    body { font-family: sans-serif; padding: 20px; background: #f5f7ff; }
+    .form { max-width: 500px; margin: auto; }
+    input, textarea { width: 100%; padding: 10px; margin: 8px 0; border: 1px solid #ccc; border-radius: 6px; }
+    button { background: #6e8efb; color: white; padding: 12px; border: none; border-radius: 6px; cursor: pointer; width: 100%; }
+    a { display: block; text-align: center; margin-top: 20px; color: #6e8efb; }
+  </style>
 </head>
 <body>
-    <div class="container">
-        <h1>Report a Lost Item</h1>
-        <p>We’ll help you find it. Fill out the details below.</p>
-        <form>
-            <input type="text" placeholder="Item name" required>
-            <input type="text" placeholder="Location" required>
-            <textarea placeholder="Description" rows="4" required></textarea>
-            <button type="submit">Submit Report</button>
-        </form>
-        <a href="index.html">← Back to Home</a>
-    </div>
+  <div class="form">
+    <h1>Report a Lost Item</h1>
+    <form id="reportForm">
+      <input type="text" id="item" placeholder="Item name" required />
+      <input type="text" id="location" placeholder="Location" required />
+      <textarea id="description" placeholder="Description" required></textarea>
+      <button type="submit">Submit Report</button>
+    </form>
+    <a href="index.html">← Back to Home</a>
+  </div>
+
+  <script type="module">
+    // Load Supabase
+    import { createClient } from 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js/+esm';
+
+    // Replace with YOUR Supabase project URL and anon key
+    const supabase = createClient(
+      'https://your-project.supabase.co',
+      'your-anon-key'
+    );
+
+    document.getElementById('reportForm').addEventListener('submit', async (e) => {
+      e.preventDefault();
+      
+      const report = {
+        item_name: document.getElementById('item').value,
+        location: document.getElementById('location').value,
+        description: document.getElementById('description').value
+      };
+
+      const { data, error } = await supabase.from('reports').insert([report]);
+      
+      if (error) {
+        alert('Error: ' + error.message);
+      } else {
+        alert('✅ Report submitted! We’ll notify you if found.');
+        document.getElementById('reportForm').reset();
+      }
+    });
+  </script>
 </body>
 </html>
