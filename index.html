@@ -4,25 +4,21 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>YearnaZ — Lost & Found App</title>
-  <meta name="description" content="Reunite with lost items across airports, transit, hotels, and campuses. Instant matches. Secure returns.">
+  <meta name="description" content="Reunite with lost items across airports, transit, hotels, and campuses.">
 
   <style>
     :root {
-      --bg: #f0f4ff;
-      --text: #1a1a2e;
+      --bg: #f8fafc;
+      --text: #0f172a;
       --card: #ffffff;
       --primary: #6e8efb;
-      --secondary: #a777e3;
-      --accent: #ff6b6b;
-      --border: #e0e6f5;
-      --shadow: 0 4px 12px rgba(0,0,0,0.08);
+      --border: #e2e8f0;
     }
     [data-theme="dark"] {
-      --bg: #0f0f1b;
-      --text: #f0f4ff;
-      --card: #1a1a2e;
-      --border: #2d2d44;
-      --shadow: 0 4px 12px rgba(0,0,0,0.3);
+      --bg: #0f172a;
+      --text: #f8fafc;
+      --card: #1e293b;
+      --border: #334155;
     }
 
     * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -33,11 +29,10 @@
       line-height: 1.6;
       transition: background 0.3s, color 0.3s;
     }
-    a { color: var(--primary); text-decoration: none; }
     .container { width: 90%; max-width: 800px; margin: 0 auto; padding: 20px; }
 
-    /* Header / Nav */
-    header {
+    /* Nav */
+    nav {
       display: flex;
       justify-content: space-between;
       align-items: center;
@@ -45,107 +40,59 @@
       border-bottom: 1px solid var(--border);
     }
     .logo { font-size: 1.4rem; font-weight: 700; }
-    .controls { display: flex; gap: 12px; align-items: center; }
+    .controls { display: flex; gap: 12px; }
     select, button {
-      padding: 8px 12px;
-      border-radius: 8px;
+      padding: 6px 12px;
+      border-radius: 6px;
       border: 1px solid var(--border);
       background: var(--card);
       color: var(--text);
-      font-size: 0.95rem;
       cursor: pointer;
     }
-    button { background: var(--primary); color: white; border: none; }
 
     /* Hero */
     .hero { text-align: center; padding: 40px 0; }
-    h1 { font-size: 2.2rem; margin-bottom: 12px; }
+    h1 { font-size: 2rem; margin-bottom: 12px; }
     .subtitle { opacity: 0.85; margin-bottom: 30px; }
 
-    /* Tabs */
-    .tabs {
-      display: flex;
-      gap: 16px;
-      margin-bottom: 30px;
-      justify-content: center;
-    }
-    .tab-btn {
-      padding: 12px 24px;
-      border: none;
-      background: transparent;
-      color: var(--text);
-      font-weight: 600;
-      cursor: pointer;
-      border-bottom: 3px solid transparent;
-    }
-    .tab-btn.active {
-      color: var(--primary);
-      border-bottom-color: var(--primary);
-    }
-
-    /* Form */
-    .form-container { display: none; }
-    .form-container.active { display: block; }
-    .form-box {
+    /* Search */
+    .search-box {
       background: var(--card);
-      padding: 30px;
+      padding: 24px;
       border-radius: 16px;
-      box-shadow: var(--shadow);
-      margin-bottom: 30px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+      margin: 30px 0;
     }
-    .form-box h2 { margin-bottom: 20px; }
-    .input-group {
-      margin-bottom: 16px;
-    }
-    label {
-      display: block;
-      margin-bottom: 6px;
-      font-weight: 600;
-      font-size: 0.95rem;
-    }
-    input, textarea {
+    input, button {
       width: 100%;
-      padding: 14px;
+      padding: 12px;
+      margin: 8px 0;
       border: 1px solid var(--border);
-      border-radius: 10px;
-      background: var(--card);
-      color: var(--text);
-      font-size: 1rem;
+      border-radius: 8px;
     }
-    textarea { min-height: 100px; resize: vertical; }
-    .submit-btn {
-      width: 100%;
-      padding: 14px;
+    button {
       background: var(--primary);
       color: white;
       border: none;
-      border-radius: 12px;
-      font-size: 1.1rem;
       font-weight: 600;
       cursor: pointer;
     }
+    #results { margin-top: 20px; }
+    .result-item {
+      padding: 12px;
+      border-bottom: 1px solid var(--border);
+    }
 
     /* Footer */
-    footer {
-      text-align: center;
-      padding: 30px 0;
-      color: var(--text);
-      opacity: 0.8;
-      font-size: 0.9rem;
-    }
-
-    @media (max-width: 600px) {
-      .tabs { flex-direction: column; align-items: center; }
-      .tab-btn { width: 100%; max-width: 300px; }
-    }
+    footer { text-align: center; padding: 30px 0; opacity: 0.8; font-size: 0.9rem; }
   </style>
 </head>
 <body>
   <div class="container">
-    <header>
+    <nav>
       <div class="logo">YearnaZ</div>
       <div class="controls">
-        <select id="languageSelect" aria-label="Select language">
+        <select id="langSelect">
           <option value="en">English</option>
           <option value="es">Español</option>
           <option value="fr">Français</option>
@@ -159,316 +106,138 @@
           <option value="zh">中文</option>
           <option value="ar">العربية</option>
         </select>
-        <button id="themeToggle" aria-label="Toggle light/dark mode">🌙</button>
+        <button id="themeBtn">🌙</button>
       </div>
-    </header>
+    </nav>
 
     <main>
       <section class="hero">
-        <h1 data-key="heroTitle">YearnaZ — Find it. Return it. Fast.</h1>
-        <p class="subtitle" data-key="heroSubtitle">Lost on the go? Reconnect with your things across transit, hotels, campuses and more.</p>
+        <h1 id="heroTitle">YearnaZ — Find it. Return it. Fast.</h1>
+        <p class="subtitle" id="heroSubtitle">Lost on the go? Reconnect with your things.</p>
       </section>
 
-      <div class="tabs">
-        <button class="tab-btn active" data-tab="search">🔍 <span data-key="searchTab">Search Lost Items</span></button>
-        <button class="tab-btn" data-tab="found">✅ <span data-key="foundTab">Report Found Item</span></button>
+      <div class="search-box">
+        <h2 id="searchTitle">Search Lost Items</h2>
+        <input type="text" id="searchInput" placeholder="e.g., Black wallet, Silver AirPods">
+        <button id="searchBtn">Search Now</button>
+        <div id="results"></div>
       </div>
 
-      <!-- Search Form -->
-      <div id="searchForm" class="form-container active">
-        <div class="form-box">
-          <h2 data-key="searchTitle">Search for Lost Items</h2>
-          <div class="input-group">
-            <label for="searchItem" data-key="itemLabel">Item Name or Description</label>
-            <input type="text" id="searchItem" placeholder="e.g., Black wallet, Silver AirPods">
-          </div>
-          <div class="input-group">
-            <label for="searchLocation" data-key="locationLabel">Location (Optional)</label>
-            <input type="text" id="searchLocation" placeholder="e.g., JFK Airport, Main Library">
-          </div>
-          <button class="submit-btn" data-key="searchButton">Search Now</button>
-        </div>
-      </div>
-
-      <!-- Found Form -->
-      <div id="foundForm" class="form-container">
-        <div class="form-box">
-          <h2 data-key="foundTitle">Report a Found Item</h2>
-          <div class="input-group">
-            <label for="foundItem" data-key="itemLabel">Item Name</label>
-            <input type="text" id="foundItem" required>
-          </div>
-          <div class="input-group">
-            <label for="foundLocation" data-key="locationLabel">Where Found</label>
-            <input type="text" id="foundLocation" required>
-          </div>
-          <div class="input-group">
-            <label for="foundDesc" data-key="descLabel">Description</label>
-            <textarea id="foundDesc" placeholder="Color, brand, damage, contents"></textarea>
-          </div>
-          <button class="submit-btn" data-key="reportButton">Submit Report</button>
-        </div>
-      </div>
+      <p style="text-align:center; margin: 20px 0;">
+        <a href="report.html" style="color:#6e8efb;">→ Report a lost item</a> | 
+        <a href="found.html" style="color:#6e8efb;">→ Report a found item</a>
+      </p>
     </main>
 
     <footer>
       <p>© 2025 YearnaZ. Reuniting people with what matters.</p>
-      <p><a href="#" data-key="privacyLink">Privacy Policy</a> • <a href="#" data-key="contactLink">Contact</a></p>
+      <p>
+        <a href="privacy.html">Privacy</a> • 
+        <a href="contact.html">Contact</a>
+      </p>
     </footer>
   </div>
 
-  <script>
-    // ===== THEME TOGGLE =====
-    const themeToggle = document.getElementById('themeToggle');
-    const htmlTag = document.getElementById('htmlTag');
-    const isDark = localStorage.getItem('theme') === 'dark';
-    
-    if (isDark) {
-      document.body.setAttribute('data-theme', 'dark');
-      themeToggle.textContent = '☀️';
-    }
+  <!-- CRISP CHAT (Free Plan) -->
+  <script type="text/javascript">
+    window.$crisp = []; window.CRISP_WEBSITE_ID = "your-crisp-website-id";
+    (function() { d = document; s = d.createElement("script");
+    s.src = "https://client.crisp.chat/l.js"; s.async = 1;
+    d.getElementsByTagName("head")[0].appendChild(s); })();
+  </script>
 
-    themeToggle.addEventListener('click', () => {
-      const isDark = document.body.getAttribute('data-theme') === 'dark';
+  <script type="module">
+    // ===== THEME =====
+    const themeBtn = document.getElementById('themeBtn');
+    const isDark = localStorage.getItem('theme') === 'dark';
+    if (isDark) {
+      document.documentElement.setAttribute('data-theme', 'dark');
+      themeBtn.textContent = '☀️';
+    }
+    themeBtn.addEventListener('click', () => {
+      const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
       if (isDark) {
-        document.body.removeAttribute('data-theme');
+        document.documentElement.removeAttribute('data-theme');
         localStorage.setItem('theme', 'light');
-        themeToggle.textContent = '🌙';
+        themeBtn.textContent = '🌙';
       } else {
-        document.body.setAttribute('data-theme', 'dark');
+        document.documentElement.setAttribute('data-theme', 'dark');
         localStorage.setItem('theme', 'dark');
-        themeToggle.textContent = '☀️';
+        themeBtn.textContent = '☀️';
       }
     });
 
-    // ===== LANGUAGE DATA (12 LANGUAGES) =====
+    // ===== LANGUAGE =====
     const translations = {
-      en: {
-        heroTitle: "YearnaZ — Find it. Return it. Fast.",
-        heroSubtitle: "Lost on the go? Reconnect with your things across transit, hotels, campuses and more.",
-        searchTab: "Search Lost Items",
-        foundTab: "Report Found Item",
-        searchTitle: "Search for Lost Items",
-        foundTitle: "Report a Found Item",
-        itemLabel: "Item Name or Description",
-        locationLabel: "Location (Optional)",
-        descLabel: "Description",
-        searchButton: "Search Now",
-        reportButton: "Submit Report",
-        privacyLink: "Privacy Policy",
-        contactLink: "Contact"
-      },
-      es: {
-        heroTitle: "YearnaZ — Encuéntralo. Devuélvelo. Rápido.",
-        heroSubtitle: "¿Perdiste algo? Reconéctate con tus pertenencias en aeropuertos, hoteles y campus.",
-        searchTab: "Buscar Objetos Perdidos",
-        foundTab: "Reportar Objeto Encontrado",
-        searchTitle: "Buscar Objetos Perdidos",
-        foundTitle: "Reportar Objeto Encontrado",
-        itemLabel: "Nombre o Descripción del Artículo",
-        locationLabel: "Ubicación (Opcional)",
-        descLabel: "Descripción",
-        searchButton: "Buscar Ahora",
-        reportButton: "Enviar Reporte",
-        privacyLink: "Política de Privacidad",
-        contactLink: "Contacto"
-      },
-      fr: {
-        heroTitle: "YearnaZ — Trouvez-le. Rendez-le. Rapidement.",
-        heroSubtitle: "Perdu en déplacement ? Retrouvez vos affaires dans les transports, hôtels et campus.",
-        searchTab: "Rechercher des objets perdus",
-        foundTab: "Signaler un objet trouvé",
-        searchTitle: "Rechercher des objets perdus",
-        foundTitle: "Signaler un objet trouvé",
-        itemLabel: "Nom ou description de l'objet",
-        locationLabel: "Emplacement (Optionnel)",
-        descLabel: "Description",
-        searchButton: "Rechercher maintenant",
-        reportButton: "Soumettre le rapport",
-        privacyLink: "Politique de confidentialité",
-        contactLink: "Contact"
-      },
-      de: {
-        heroTitle: "YearnaZ — Finde es. Gib es zurück. Schnell.",
-        heroSubtitle: "Unterwegs verloren? Verbinde dich wieder mit deinen Dingen in Transport, Hotels und Campus.",
-        searchTab: "Verlorene Gegenstände suchen",
-        foundTab: "Gefundenes Objekt melden",
-        searchTitle: "Verlorene Gegenstände suchen",
-        foundTitle: "Gefundenes Objekt melden",
-        itemLabel: "Name oder Beschreibung des Gegenstands",
-        locationLabel: "Standort (optional)",
-        descLabel: "Beschreibung",
-        searchButton: "Jetzt suchen",
-        reportButton: "Bericht senden",
-        privacyLink: "Datenschutzrichtlinie",
-        contactLink: "Kontakt"
-      },
-      // Add more languages as needed (pt, it, nl, ru, ja, ko, zh, ar)
-      pt: {
-        heroTitle: "YearnaZ — Encontre. Devolva. Rápido.",
-        heroSubtitle: "Perdeu algo? Reconecte-se com seus pertences em transportes, hotéis e campi.",
-        searchTab: "Buscar Itens Perdidos",
-        foundTab: "Relatar Item Encontrado",
-        searchTitle: "Buscar Itens Perdidos",
-        foundTitle: "Relatar Item Encontrado",
-        itemLabel: "Nome ou Descrição do Item",
-        locationLabel: "Localização (Opcional)",
-        descLabel: "Descrição",
-        searchButton: "Buscar Agora",
-        reportButton: "Enviar Relatório",
-        privacyLink: "Política de Privacidade",
-        contactLink: "Contato"
-      },
-      it: {
-        heroTitle: "YearnaZ — Trovalo. Restituiscilo. Veloce.",
-        heroSubtitle: "Perso qualcosa? Riconnettiti con i tuoi oggetti in trasporti, hotel e campus.",
-        searchTab: "Cerca Oggetti Smarriti",
-        foundTab: "Segnala Oggetto Trovato",
-        searchTitle: "Cerca Oggetti Smarriti",
-        foundTitle: "Segnala Oggetto Trovato",
-        itemLabel: "Nome o Descrizione dell'Oggetto",
-        locationLabel: "Posizione (Opzionale)",
-        descLabel: "Descrizione",
-        searchButton: "Cerca Ora",
-        reportButton: "Invia Segnalazione",
-        privacyLink: "Informativa sulla Privacy",
-        contactLink: "Contatti"
-      },
-      nl: {
-        heroTitle: "YearnaZ — Vind het. Geef het terug. Snel.",
-        heroSubtitle: "Onderweg iets verloren? Herstel de verbinding met je spullen in vervoer, hotels en campussen.",
-        searchTab: "Zoek Verloren Voorwerpen",
-        foundTab: "Meld Gevonden Voorwerp",
-        searchTitle: "Zoek Verloren Voorwerpen",
-        foundTitle: "Meld Gevonden Voorwerp",
-        itemLabel: "Naam of Beschrijving van het Voorwerp",
-        locationLabel: "Locatie (Optioneel)",
-        descLabel: "Beschrijving",
-        searchButton: "Zoek Nu",
-        reportButton: "Verstuur Rapport",
-        privacyLink: "Privacybeleid",
-        contactLink: "Contact"
-      },
-      ru: {
-        heroTitle: "YearnaZ — Найди. Верни. Быстро.",
-        heroSubtitle: "Потеряли что-то в пути? Верните связь с вещами в транспорте, отелях и кампусах.",
-        searchTab: "Поиск потерянных вещей",
-        foundTab: "Сообщить о находке",
-        searchTitle: "Поиск потерянных вещей",
-        foundTitle: "Сообщить о находке",
-        itemLabel: "Название или описание предмета",
-        locationLabel: "Местоположение (опционально)",
-        descLabel: "Описание",
-        searchButton: "Искать сейчас",
-        reportButton: "Отправить отчет",
-        privacyLink: "Политика конфиденциальности",
-        contactLink: "Контакты"
-      },
-      ja: {
-        heroTitle: "YearnaZ — 見つけて。返して。素早く。",
-        heroSubtitle: "移動中に紛失？交通機関、ホテル、キャンパスで物を再接続。",
-        searchTab: "紛失物を検索",
-        foundTab: "拾得物を報告",
-        searchTitle: "紛失物を検索",
-        foundTitle: "拾得物を報告",
-        itemLabel: "アイテム名または説明",
-        locationLabel: "場所（任意）",
-        descLabel: "説明",
-        searchButton: "今すぐ検索",
-        reportButton: "報告を送信",
-        privacyLink: "プライバシーポリシー",
-        contactLink: "お問い合わせ"
-      },
-      ko: {
-        heroTitle: "YearnaZ — 찾고. 돌려주고. 빠르게.",
-        heroSubtitle: "이동 중 분실? 교통, 호텔, 캠퍼스에서 물건을 다시 연결하세요.",
-        searchTab: "분실물 검색",
-        foundTab: "습득물 신고",
-        searchTitle: "분실물 검색",
-        foundTitle: "습득물 신고",
-        itemLabel: "물품 이름 또는 설명",
-        locationLabel: "위치 (선택 사항)",
-        descLabel: "설명",
-        searchButton: "지금 검색",
-        reportButton: "신고 제출",
-        privacyLink: "개인정보 처리방침",
-        contactLink: "연락처"
-      },
-      zh: {
-        heroTitle: "YearnaZ — 找到它。归还它。快速。",
-        heroSubtitle: "途中丢失？在交通、酒店和校园中重新连接您的物品。",
-        searchTab: "搜索丢失物品",
-        foundTab: "报告拾获物品",
-        searchTitle: "搜索丢失物品",
-        foundTitle: "报告拾获物品",
-        itemLabel: "物品名称或描述",
-        locationLabel: "位置（可选）",
-        descLabel: "描述",
-        searchButton: "立即搜索",
-        reportButton: "提交报告",
-        privacyLink: "隐私政策",
-        contactLink: "联系"
-      },
-      ar: {
-        heroTitle: "YearnaZ — اعثر عليه. أعدْه. بسرعة.",
-        heroSubtitle: "هل فقدت شيئًا أثناء التنقّل؟ أعد الاتصال بأشيائك في وسائل النقل والفنادق والجامعات.",
-        searchTab: "البحث عن أشياء مفقودة",
-        foundTab: "الإبلاغ عن عنصر وجد",
-        searchTitle: "البحث عن أشياء مفقودة",
-        foundTitle: "الإبلاغ عن عنصر وجد",
-        itemLabel: "اسم أو وصف العنصر",
-        locationLabel: "الموقع (اختياري)",
-        descLabel: "الوصف",
-        searchButton: "ابحث الآن",
-        reportButton: "إرسال التقرير",
-        privacyLink: "سياسة الخصوصية",
-        contactLink: "اتصل بنا"
-      }
+      en: { heroTitle: "YearnaZ — Find it. Return it. Fast.", heroSubtitle: "Lost on the go? Reconnect with your things.", searchTitle: "Search Lost Items" },
+      es: { heroTitle: "YearnaZ — Encuéntralo. Devuélvelo. Rápido.", heroSubtitle: "¿Perdiste algo? Reconéctate con tus pertenencias.", searchTitle: "Buscar Objetos Perdidos" },
+      fr: { heroTitle: "YearnaZ — Trouvez-le. Rendez-le. Rapidement.", heroSubtitle: "Perdu en déplacement ? Retrouvez vos affaires.", searchTitle: "Rechercher des objets perdus" },
+      de: { heroTitle: "YearnaZ — Finde es. Gib es zurück. Schnell.", heroSubtitle: "Unterwegs verloren? Verbinde dich wieder mit deinen Dingen.", searchTitle: "Verlorene Gegenstände suchen" },
+      pt: { heroTitle: "YearnaZ — Encontre. Devolva. Rápido.", heroSubtitle: "Perdeu algo? Reconecte-se com seus pertences.", searchTitle: "Buscar Itens Perdidos" },
+      it: { heroTitle: "YearnaZ — Trovalo. Restituiscilo. Veloce.", heroSubtitle: "Perso qualcosa? Riconnettiti con i tuoi oggetti.", searchTitle: "Cerca Oggetti Smarriti" },
+      nl: { heroTitle: "YearnaZ — Vind het. Geef het terug. Snel.", heroSubtitle: "Onderweg iets verloren? Herstel de verbinding met je spullen.", searchTitle: "Zoek Verloren Voorwerpen" },
+      ru: { heroTitle: "YearnaZ — Найди. Верни. Быстро.", heroSubtitle: "Потеряли что-то в пути? Верните связь с вещами.", searchTitle: "Поиск потерянных вещей" },
+      ja: { heroTitle: "YearnaZ — 見つけて。返して。素早く。", heroSubtitle: "移動中に紛失？物を再接続。", searchTitle: "紛失物を検索" },
+      ko: { heroTitle: "YearnaZ — 찾고. 돌려주고. 빠르게.", heroSubtitle: "이동 중 분실? 물건을 다시 연결하세요.", searchTitle: "분실물 검색" },
+      zh: { heroTitle: "YearnaZ — 找到它。归还它。快速。", heroSubtitle: "途中丢失？重新连接您的物品。", searchTitle: "搜索丢失物品" },
+      ar: { heroTitle: "YearnaZ — اعثر عليه. أعدْه. بسرعة.", heroSubtitle: "هل فقدت شيئًا أثناء التنقّل؟ أعد الاتصال بأشيائك.", searchTitle: "البحث عن أشياء مفقودة" }
     };
 
-    // ===== TRANSLATION ENGINE =====
-    function translate(lang) {
-      document.querySelectorAll('[data-key]').forEach(el => {
-        const key = el.getAttribute('data-key');
-        if (translations[lang] && translations[lang][key]) {
-          el.textContent = translations[lang][key];
-        }
-      });
-      document.getElementById('languageSelect').value = lang;
+    function updateLang(lang) {
+      if (translations[lang]) {
+        document.getElementById('heroTitle').textContent = translations[lang].heroTitle;
+        document.getElementById('heroSubtitle').textContent = translations[lang].heroSubtitle;
+        document.getElementById('searchTitle').textContent = translations[lang].searchTitle;
+        document.getElementById('searchInput').placeholder = 
+          lang === 'es' ? 'ej. Billetera negra, AirPods plateados' :
+          lang === 'fr' ? 'ex. Portefeuille noir, AirPods argentés' :
+          'e.g., Black wallet, Silver AirPods';
+      }
       localStorage.setItem('lang', lang);
     }
 
-    // Load saved language or detect browser
     const savedLang = localStorage.getItem('lang') || navigator.language.split('-')[0] || 'en';
-    const lang = translations[savedLang] ? savedLang : 'en';
-    translate(lang);
+    updateLang(translations[savedLang] ? savedLang : 'en');
+    document.getElementById('langSelect').value = savedLang;
+    document.getElementById('langSelect').addEventListener('change', e => updateLang(e.target.value));
 
-    document.getElementById('languageSelect').addEventListener('change', (e) => {
-      translate(e.target.value);
-    });
+    // ===== SUPABASE SEARCH =====
+    import { createClient } from 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js/+esm';
 
-    // ===== TAB SWITCHING =====
-    document.querySelectorAll('.tab-btn').forEach(btn => {
-      btn.addEventListener('click', () => {
-        document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
-        document.querySelectorAll('.form-container').forEach(f => f.classList.remove('active'));
-        btn.classList.add('active');
-        const tab = btn.getAttribute('data-tab');
-        document.getElementById(tab + 'Form').classList.add('active');
-      });
-    });
+    // 🔑 REPLACE THESE WITH YOUR REAL SUPABASE CREDENTIALS
+    const supabase = createClient(
+      'https://your-project.supabase.co',
+      'your-anon-public-key'
+    );
 
-    // ===== FORM SUBMISSION (demo) =====
-    document.querySelectorAll('.submit-btn').forEach(btn => {
-      btn.addEventListener('click', (e) => {
-        e.preventDefault();
-        const lang = localStorage.getItem('lang') || 'en';
-        const msg = lang === 'es' ? '✅ ¡Reporte enviado!' : 
-                    lang === 'fr' ? '✅ Rapport envoyé !' : 
-                    lang === 'de' ? '✅ Bericht gesendet!' : 
-                    '✅ Report submitted!';
-        alert(msg);
-      });
+    document.getElementById('searchBtn').addEventListener('click', async () => {
+      const query = document.getElementById('searchInput').value.trim();
+      if (!query) return;
+
+      const { data, error } = await supabase
+        .from('reports')
+        .select('item_name, location, description')
+        .or(`item_name.ilike.%${query}%,description.ilike.%${query}%`)
+        .limit(5);
+
+      const resultsDiv = document.getElementById('results');
+      if (error) {
+        resultsDiv.innerHTML = `<p style="color:red;">Error: ${error.message}</p>`;
+        return;
+      }
+
+      if (data.length === 0) {
+        resultsDiv.innerHTML = '<p>No matches found.</p>';
+        return;
+      }
+
+      resultsDiv.innerHTML = data.map(item => 
+        `<div class="result-item">
+          <strong>${item.item_name}</strong><br>
+          ${item.description}<br>
+          <em>Location: ${item.location}</em>
+        </div>`
+      ).join('');
     });
   </script>
 </body>
