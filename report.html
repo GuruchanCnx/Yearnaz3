@@ -26,7 +26,7 @@
   </div>
   <script type="module">
     import { createClient } from 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js/+esm';
-    const supabase = createClient('https://your-project.supabase.co', 'your-anon-key');
+    const supabase = createClient('https://jcbylpynjwpkxkoxkphd.supabase.co', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImpjYnlscHluandwa3hrb3hrcGhkIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTk2OTg0MzMsImV4cCI6MjA3NTI3NDQzM30.inEep6kgr2sysdTg3SoVtwHiEr_u7nmAWQ1_BwGHJDE');
     document.getElementById('reportForm').addEventListener('submit', async (e) => {
       e.preventDefault();
       const { error } = await supabase.from('reports').insert([{ 
