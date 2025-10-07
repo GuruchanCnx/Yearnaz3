@@ -5,52 +5,11 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Report a Lost Item - YearnaZ</title>
   <style>
-    body {
-      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-      background: linear-gradient(135deg, #6e8efb, #a777e3);
-      color: white;
-      margin: 0;
-      padding: 20px;
-      min-height: 100vh;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-    .container {
-      background: rgba(255, 255, 255, 0.1);
-      padding: 30px;
-      border-radius: 20px;
-      backdrop-filter: blur(10px);
-      text-align: center;
-      max-width: 500px;
-      width: 100%;
-    }
-    input, textarea {
-      width: 100%;
-      padding: 12px;
-      margin: 10px 0;
-      border-radius: 10px;
-      border: 1px solid rgba(255,255,255,0.3);
-      background: rgba(0,0,0,0.1);
-      color: white;
-    }
-    button {
-      background: #ff6b6b;
-      color: white;
-      border: none;
-      padding: 14px;
-      width: 100%;
-      border-radius: 14px;
-      font-size: 1.1rem;
-      margin-top: 15px;
-      cursor: pointer;
-    }
-    a {
-      display: inline-block;
-      margin-top: 20px;
-      color: rgba(255,255,255,0.9);
-      text-decoration: none;
-    }
+    body { font-family: sans-serif; background: linear-gradient(135deg, #6e8efb, #a777e3); color: white; padding: 20px; }
+    .container { max-width: 500px; margin: auto; background: rgba(255,255,255,0.1); padding: 30px; border-radius: 20px; backdrop-filter: blur(10px); text-align: center; }
+    input, textarea { width: 100%; padding: 12px; margin: 10px 0; border-radius: 10px; border: 1px solid rgba(255,255,255,0.3); background: rgba(0,0,0,0.1); color: white; }
+    button { background: #ff6b6b; color: white; border: none; padding: 14px; width: 100%; border-radius: 14px; cursor: pointer; }
+    a { display: block; margin-top: 20px; color: rgba(255,255,255,0.9); text-decoration: none; }
   </style>
 </head>
 <body>
@@ -65,33 +24,18 @@
     </form>
     <a href="index.html">← Back to Home</a>
   </div>
-
   <script type="module">
     import { createClient } from 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js/+esm';
-
-    // 🔑 REPLACE WITH YOUR SUPABASE CREDENTIALS
-    const supabase = createClient(
-      'https://jcbylpynjwpkxkoxkphd.supabase.co',
-      'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImpjYnlscHluandwa3hrb3hrcGhkIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTk2OTg0MzMsImV4cCI6MjA3NTI3NDQzM30.inEep6kgr2sysdTg3SoVtwHiEr_u7nmAWQ1_BwGHJDE'
-    );
-
+    const supabase = createClient('https://your-project.supabase.co', 'your-anon-key');
     document.getElementById('reportForm').addEventListener('submit', async (e) => {
       e.preventDefault();
-      
-      const report = {
+      const { error } = await supabase.from('reports').insert([{ 
+        type: 'lost',
         item_name: document.getElementById('item_name').value,
         location: document.getElementById('location').value,
         description: document.getElementById('description').value
-      };
-
-      const { error } = await supabase.from('reports').insert([report]);
-      
-      if (error) {
-        alert('❌ Submission failed: ' + error.message);
-      } else {
-        alert('✅ Report submitted! We’ll notify you if found.');
-        document.getElementById('reportForm').reset();
-      }
+      }]);
+      alert(error ? '❌ Failed' : '✅ Submitted!');
     });
   </script>
 </body>
