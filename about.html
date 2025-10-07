@@ -10,6 +10,133 @@
     a { display: inline-block; margin-top: 30px; color: rgba(255,255,255,0.9); text-decoration: none; }
   </style>
 </head>
+  <script>
+  // 12-Language Support (Lightweight)
+  const translations = {
+    en: { 
+      reportTitle: "Report a Lost Item", 
+      subtitle: "We’ll help you find it. Fill out the details below.",
+      itemLabel: "Item name",
+      locationLabel: "Location",
+      descLabel: "Description",
+      submitBtn: "Submit Report",
+      backHome: "← Back to Home"
+    },
+    es: { 
+      reportTitle: "Reportar un Artículo Perdido", 
+      subtitle: "Te ayudaremos a encontrarlo. Completa los detalles a continuación.",
+      itemLabel: "Nombre del artículo",
+      locationLabel: "Ubicación",
+      descLabel: "Descripción",
+      submitBtn: "Enviar Reporte",
+      backHome: "← Volver al Inicio"
+    },
+    fr: { 
+      reportTitle: "Signaler un objet perdu", 
+      subtitle: "Nous vous aiderons à le retrouver. Remplissez les détails ci-dessous.",
+      itemLabel: "Nom de l'objet",
+      locationLabel: "Emplacement",
+      descLabel: "Description",
+      submitBtn: "Soumettre le rapport",
+      backHome: "← Retour à l'accueil"
+    },
+    de: { 
+      reportTitle: "Verlorenen Gegenstand melden", 
+      subtitle: "Wir helfen Ihnen, ihn zu finden. Füllen Sie die Details unten aus.",
+      itemLabel: "Gegenstandsname",
+      locationLabel: "Standort",
+      descLabel: "Beschreibung",
+      submitBtn: "Bericht senden",
+      backHome: "← Zurück zur Startseite"
+    },
+    pt: { 
+      reportTitle: "Relatar um Item Perdido", 
+      subtitle: "Ajudaremos você a encontrá-lo. Preencha os detalhes abaixo.",
+      itemLabel: "Nome do item",
+      locationLabel: "Localização",
+      descLabel: "Descrição",
+      submitBtn: "Enviar Relatório",
+      backHome: "← Voltar para Início"
+    },
+    it: { 
+      reportTitle: "Segnala un oggetto smarrito", 
+      subtitle: "Ti aiuteremo a trovarlo. Compila i dettagli qui sotto.",
+      itemLabel: "Nome oggetto",
+      locationLabel: "Posizione",
+      descLabel: "Descrizione",
+      submitBtn: "Invia Segnalazione",
+      backHome: "← Torna alla Home"
+    },
+    nl: { 
+      reportTitle: "Meld een verloren voorwerp", 
+      subtitle: "We helpen je het te vinden. Vul hieronder de gegevens in.",
+      itemLabel: "Naam voorwerp",
+      locationLabel: "Locatie",
+      descLabel: "Beschrijving",
+      submitBtn: "Rapport verzenden",
+      backHome: "← Terug naar home"
+    },
+    ru: { 
+      reportTitle: "Сообщить о потере вещи", 
+      subtitle: "Мы поможем вам найти её. Заполните данные ниже.",
+      itemLabel: "Название предмета",
+      locationLabel: "Местоположение",
+      descLabel: "Описание",
+      submitBtn: "Отправить отчет",
+      backHome: "← Вернуться на главную"
+    },
+    ja: { 
+      reportTitle: "紛失物を報告", 
+      subtitle: "見つけるお手伝いをします。以下の詳細を入力してください。",
+      itemLabel: "アイテム名",
+      locationLabel: "場所",
+      descLabel: "説明",
+      submitBtn: "報告を送信",
+      backHome: "← ホームに戻る"
+    },
+    ko: { 
+      reportTitle: "분실물 신고", 
+      subtitle: "찾는 것을 도와드리겠습니다. 아래에 세부 정보를 입력하세요.",
+      itemLabel: "물품 이름",
+      locationLabel: "위치",
+      descLabel: "설명",
+      submitBtn: "신고 제출",
+      backHome: "← 홈으로 돌아가기"
+    },
+    zh: { 
+      reportTitle: "报告丢失物品", 
+      subtitle: "我们将帮您找回。请填写以下详细信息。",
+      itemLabel: "物品名称",
+      locationLabel: "位置",
+      descLabel: "描述",
+      submitBtn: "提交报告",
+      backHome: "← 返回首页"
+    },
+    ar: { 
+      reportTitle: "الإبلاغ عن عنصر مفقود", 
+      subtitle: "سنساعدك في العثور عليه. املأ التفاصيل أدناه.",
+      itemLabel: "اسم العنصر",
+      locationLabel: "الموقع",
+      descLabel: "الوصف",
+      submitBtn: "إرسال التقرير",
+      backHome: "← العودة إلى الصفحة الرئيسية"
+    }
+  };
+
+  function applyLanguage(lang) {
+    const t = translations[lang] || translations.en;
+    document.querySelectorAll('[data-i18n]').forEach(el => {
+      const key = el.getAttribute('data-i18n');
+      if (t[key]) el.textContent = t[key];
+    });
+    localStorage.setItem('lang', lang);
+  }
+
+  // Auto-detect or load saved language
+  const savedLang = localStorage.getItem('lang') || navigator.language.split('-')[0] || 'en';
+  const lang = translations[savedLang] ? savedLang : 'en';
+  applyLanguage(lang);
+</script>
 <body>
   <div class="container">
     <h1>About YearnaZ</h1>
