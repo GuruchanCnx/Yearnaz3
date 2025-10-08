@@ -1,150 +1,238 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" id="htmlTag">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Contact - YearnaZ</title>
+  <title data-i18n="contactTitle">Contact Support</title>
   <style>
-    body { font-family: sans-serif; background: linear-gradient(135deg, #ff6b6b, #ff5252); color: white; padding: 20px; }
-    .container { max-width: 560px; margin: auto; background: rgba(255,255,255,0.1); padding: 40px; border-radius: 20px; backdrop-filter: blur(10px); text-align: center; }
-    a { display: inline-block; margin-top: 30px; color: rgba(255,255,255,0.9); text-decoration: none; }
+    :root {
+      --bg: #f8fafc;
+      --text: #0f172a;
+      --card-bg: #ffffff;
+      --primary: #6e8efb;
+      --accent: #ff6b6b;
+      --shadow: 0 4px 12px rgba(0,0,0,0.05);
+    }
+    [data-theme="dark"] {
+      --bg: #0f172a;
+      --text: #f8fafc;
+      --card-bg: #1e293b;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+      transition: background 0.3s, color 0.3s;
+    }
+    .container { width: 90%; max-width: 800px; margin: 0 auto; padding: 20px; }
+
+    /* Nav */
+    nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 16px 0;
+      border-bottom: 1px solid rgba(0,0,0,0.1);
+    }
+    .logo { font-size: 1.4rem; font-weight: 700; }
+    .controls { display: flex; gap: 12px; }
+    select, button {
+      padding: 6px 12px;
+      border-radius: 6px;
+      border: 1px solid rgba(0,0,0,0.1);
+      background: var(--card-bg);
+      color: var(--text);
+      cursor: pointer;
+    }
+
+    /* Content */
+    .content-box {
+      background: var(--card-bg);
+      padding: 30px;
+      border-radius: 16px;
+      box-shadow: var(--shadow);
+      margin: 40px auto;
+      max-width: 600px;
+      text-align: center;
+    }
+    h1 { margin-bottom: 20px; }
+    p { margin: 12px 0; line-height: 1.6; }
+    a {
+      display: inline-block;
+      margin-top: 20px;
+      color: var(--primary);
+      text-decoration: none;
+    }
   </style>
 </head>
-  <script>
-  // 12-Language Support (Lightweight)
-  const translations = {
-    en: { 
-      reportTitle: "Report a Lost Item", 
-      subtitle: "We’ll help you find it. Fill out the details below.",
-      itemLabel: "Item name",
-      locationLabel: "Location",
-      descLabel: "Description",
-      submitBtn: "Submit Report",
-      backHome: "← Back to Home"
-    },
-    es: { 
-      reportTitle: "Reportar un Artículo Perdido", 
-      subtitle: "Te ayudaremos a encontrarlo. Completa los detalles a continuación.",
-      itemLabel: "Nombre del artículo",
-      locationLabel: "Ubicación",
-      descLabel: "Descripción",
-      submitBtn: "Enviar Reporte",
-      backHome: "← Volver al Inicio"
-    },
-    fr: { 
-      reportTitle: "Signaler un objet perdu", 
-      subtitle: "Nous vous aiderons à le retrouver. Remplissez les détails ci-dessous.",
-      itemLabel: "Nom de l'objet",
-      locationLabel: "Emplacement",
-      descLabel: "Description",
-      submitBtn: "Soumettre le rapport",
-      backHome: "← Retour à l'accueil"
-    },
-    de: { 
-      reportTitle: "Verlorenen Gegenstand melden", 
-      subtitle: "Wir helfen Ihnen, ihn zu finden. Füllen Sie die Details unten aus.",
-      itemLabel: "Gegenstandsname",
-      locationLabel: "Standort",
-      descLabel: "Beschreibung",
-      submitBtn: "Bericht senden",
-      backHome: "← Zurück zur Startseite"
-    },
-    pt: { 
-      reportTitle: "Relatar um Item Perdido", 
-      subtitle: "Ajudaremos você a encontrá-lo. Preencha os detalhes abaixo.",
-      itemLabel: "Nome do item",
-      locationLabel: "Localização",
-      descLabel: "Descrição",
-      submitBtn: "Enviar Relatório",
-      backHome: "← Voltar para Início"
-    },
-    it: { 
-      reportTitle: "Segnala un oggetto smarrito", 
-      subtitle: "Ti aiuteremo a trovarlo. Compila i dettagli qui sotto.",
-      itemLabel: "Nome oggetto",
-      locationLabel: "Posizione",
-      descLabel: "Descrizione",
-      submitBtn: "Invia Segnalazione",
-      backHome: "← Torna alla Home"
-    },
-    nl: { 
-      reportTitle: "Meld een verloren voorwerp", 
-      subtitle: "We helpen je het te vinden. Vul hieronder de gegevens in.",
-      itemLabel: "Naam voorwerp",
-      locationLabel: "Locatie",
-      descLabel: "Beschrijving",
-      submitBtn: "Rapport verzenden",
-      backHome: "← Terug naar home"
-    },
-    ru: { 
-      reportTitle: "Сообщить о потере вещи", 
-      subtitle: "Мы поможем вам найти её. Заполните данные ниже.",
-      itemLabel: "Название предмета",
-      locationLabel: "Местоположение",
-      descLabel: "Описание",
-      submitBtn: "Отправить отчет",
-      backHome: "← Вернуться на главную"
-    },
-    ja: { 
-      reportTitle: "紛失物を報告", 
-      subtitle: "見つけるお手伝いをします。以下の詳細を入力してください。",
-      itemLabel: "アイテム名",
-      locationLabel: "場所",
-      descLabel: "説明",
-      submitBtn: "報告を送信",
-      backHome: "← ホームに戻る"
-    },
-    ko: { 
-      reportTitle: "분실물 신고", 
-      subtitle: "찾는 것을 도와드리겠습니다. 아래에 세부 정보를 입력하세요.",
-      itemLabel: "물품 이름",
-      locationLabel: "위치",
-      descLabel: "설명",
-      submitBtn: "신고 제출",
-      backHome: "← 홈으로 돌아가기"
-    },
-    zh: { 
-      reportTitle: "报告丢失物品", 
-      subtitle: "我们将帮您找回。请填写以下详细信息。",
-      itemLabel: "物品名称",
-      locationLabel: "位置",
-      descLabel: "描述",
-      submitBtn: "提交报告",
-      backHome: "← 返回首页"
-    },
-    ar: { 
-      reportTitle: "الإبلاغ عن عنصر مفقود", 
-      subtitle: "سنساعدك في العثور عليه. املأ التفاصيل أدناه.",
-      itemLabel: "اسم العنصر",
-      locationLabel: "الموقع",
-      descLabel: "الوصف",
-      submitBtn: "إرسال التقرير",
-      backHome: "← العودة إلى الصفحة الرئيسية"
-    }
-  };
-
-  function applyLanguage(lang) {
-    const t = translations[lang] || translations.en;
-    document.querySelectorAll('[data-i18n]').forEach(el => {
-      const key = el.getAttribute('data-i18n');
-      if (t[key]) el.textContent = t[key];
-    });
-    localStorage.setItem('lang', lang);
-  }
-
-  // Auto-detect or load saved language
-  const savedLang = localStorage.getItem('lang') || navigator.language.split('-')[0] || 'en';
-  const lang = translations[savedLang] ? savedLang : 'en';
-  applyLanguage(lang);
-</script>
 <body>
   <div class="container">
-    <h1>Contact Support</h1>
-    <p>Need help with a report? Found a bug? Want to partner with us?</p>
-    <p>Click the chat icon in the bottom-right corner to speak with a real person.</p>
-    <p>We respond within 24 hours.</p>
-    <a href="index.html">← Back to Home</a>
+    <nav>
+      <div class="logo">YearnaZ</div>
+      <div class="controls">
+        <select id="langSelect">
+          <option value="en">English</option>
+          <option value="es">Español</option>
+          <option value="fr">Français</option>
+          <option value="de">Deutsch</option>
+          <option value="pt">Português</option>
+          <option value="it">Italiano</option>
+          <option value="nl">Nederlands</option>
+          <option value="ru">Русский</option>
+          <option value="ja">日本語</option>
+          <option value="ko">한국어</option>
+          <option value="zh">中文</option>
+          <option value="ar">العربية</option>
+        </select>
+        <button id="themeBtn">🌙</button>
+      </div>
+    </nav>
+
+    <main>
+      <div class="content-box">
+        <h1 data-i18n="contactTitle">Contact Support</h1>
+        <p data-i18n="needHelp">Need help with a report? Found a bug? Want to partner with us?</p>
+        <p data-i18n="chatInstruction">Click the chat icon in the bottom-right corner to speak with a real person.</p>
+        <p data-i18n="responseTime">We respond within 24 hours.</p>
+        <a href="index.html" data-i18n="backHome">← Back to Home</a>
+      </div>
+    </main>
   </div>
-  <!-- Crisp Chat will appear here if embedded in this file -->
+
+  <!-- CRISP CHAT -->
+  <script type="text/javascript">
+    window.$crisp = []; window.CRISP_WEBSITE_ID = "your-crisp-id";
+    (function() { d = document; s = d.createElement("script");
+    s.src = "https://client.crisp.chat/l.js"; s.async = 1;
+    d.getElementsByTagName("head")[0].appendChild(s); })();
+  </script>
+
+  <script type="module">
+    // ===== THEME =====
+    const themeBtn = document.getElementById('themeBtn');
+    const isDark = localStorage.getItem('theme') === 'dark';
+    if (isDark) {
+      document.documentElement.setAttribute('data-theme', 'dark');
+      themeBtn.textContent = '☀️';
+    }
+    themeBtn.addEventListener('click', () => {
+      const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
+      if (isDark) {
+        document.documentElement.removeAttribute('data-theme');
+        localStorage.setItem('theme', 'light');
+        themeBtn.textContent = '🌙';
+      } else {
+        document.documentElement.setAttribute('data-theme', 'dark');
+        localStorage.setItem('theme', 'dark');
+        themeBtn.textContent = '☀️';
+      }
+    });
+
+    // ===== LANGUAGE =====
+    const translations = {
+      en: { 
+        contactTitle: "Contact Support",
+        needHelp: "Need help with a report? Found a bug? Want to partner with us?",
+        chatInstruction: "Click the chat icon in the bottom-right corner to speak with a real person.",
+        responseTime: "We respond within 24 hours.",
+        backHome: "← Back to Home"
+      },
+      es: { 
+        contactTitle: "Contactar Soporte",
+        needHelp: "¿Necesita ayuda con un informe? ¿Encontró un error? ¿Quiere asociarse con nosotros?",
+        chatInstruction: "Haga clic en el ícono de chat en la esquina inferior derecha para hablar con una persona real.",
+        responseTime: "Respondemos en 24 horas.",
+        backHome: "← Volver al Inicio"
+      },
+      fr: { 
+        contactTitle: "Contacter le support",
+        needHelp: "Besoin d'aide pour un rapport ? Avez-vous trouvé un bug ? Souhaitez-vous collaborer avec nous ?",
+        chatInstruction: "Cliquez sur l'icône de chat en bas à droite pour parler à une personne réelle.",
+        responseTime: "Nous répondons sous 24 heures.",
+        backHome: "← Retour à l'accueil"
+      },
+      de: { 
+        contactTitle: "Support kontaktieren",
+        needHelp: "Brauchen Sie Hilfe bei einem Bericht? Haben Sie einen Fehler gefunden? Möchten Sie mit uns zusammenarbeiten?",
+        chatInstruction: "Klicken Sie auf das Chat-Symbol in der unteren rechten Ecke, um mit einer echten Person zu sprechen.",
+        responseTime: "Wir antworten innerhalb von 24 Stunden.",
+        backHome: "← Zurück zur Startseite"
+      },
+      pt: { 
+        contactTitle: "Contate o Suporte",
+        needHelp: "Precisa de ajuda com um relatório? Encontrou um erro? Quer fazer parceria conosco?",
+        chatInstruction: "Clique no ícone de chat no canto inferior direito para falar com uma pessoa real.",
+        responseTime: "Respondemos em 24 horas.",
+        backHome: "← Voltar para Início"
+      },
+      it: { 
+        contactTitle: "Contatta il Supporto",
+        needHelp: "Hai bisogno di aiuto con un rapporto? Hai trovato un bug? Vuoi collaborare con noi?",
+        chatInstruction: "Clicca sull'icona della chat nell'angolo in basso a destra per parlare con una persona reale.",
+        responseTime: "Rispondiamo entro 24 ore.",
+        backHome: "← Torna alla Home"
+      },
+      nl: { 
+        contactTitle: "Contacteer Support",
+        needHelp: "Hulp nodig met een rapport? Een fout gevonden? Wil je samenwerken met ons?",
+        chatInstruction: "Klik op het chatpictogram in de rechterbenedenhoek om te praten met een echte persoon.",
+        responseTime: "We reageren binnen 24 uur.",
+        backHome: "← Terug naar home"
+      },
+      ru: { 
+        contactTitle: "Связаться со службой поддержки",
+        needHelp: "Нужна помощь с отчетом? Нашли баг? Хотите стать партнером?",
+        chatInstruction: "Нажмите на значок чата в правом нижнем углу, чтобы поговорить с реальным человеком.",
+        responseTime: "Мы отвечаем в течение 24 часов.",
+        backHome: "← Вернуться на главную"
+      },
+      ja: { 
+        contactTitle: "サポートに連絡",
+        needHelp: "レポートに関するお手伝いが必要ですか？バグを見つけましたか？私たちと提携したいですか？",
+        chatInstruction: "右下隅のチャットアイコンをクリックして、実際の人と話してください。",
+        responseTime: "24時間以内に返信します。",
+        backHome: "← ホームに戻る"
+      },
+      ko: { 
+        contactTitle: "지원팀 문의",
+        needHelp: "보고서 관련 도움이 필요하신가요? 버그를 찾으셨나요? 우리와 협력하고 싶으신가요?",
+        chatInstruction: "오른쪽 하단 모서리의 채팅 아이콘을 클릭하여 실제 사람과 대화하세요.",
+        responseTime: "24시간 이내에 답변드립니다.",
+        backHome: "← 홈으로 돌아가기"
+      },
+      zh: { 
+        contactTitle: "联系支持",
+        needHelp: "需要报告帮助？发现错误？想与我们合作？",
+        chatInstruction: "点击右下角的聊天图标，与真人对话。",
+        responseTime: "我们会在24小时内回复。",
+        backHome: "← 返回首页"
+      },
+      ar: { 
+        contactTitle: "تواصل مع الدعم",
+        needHelp: "تحتاج مساعدة في تقرير؟ وجدت خطأ؟ تريد الشراكة معنا؟",
+        chatInstruction: "انقر على أيقونة الدردشة في الزاوية اليمنى السفلية للتحدث مع شخص حقيقي.",
+        responseTime: "نحن نرد خلال 24 ساعة.",
+        backHome: "← العودة إلى الصفحة الرئيسية"
+      }
+    };
+
+    function applyLanguage(lang) {
+      const t = translations[lang] || translations.en;
+      document.querySelectorAll('[data-i18n]').forEach(el => {
+        const key = el.getAttribute('data-i18n');
+        if (t[key]) el.textContent = t[key];
+      });
+      localStorage.setItem('lang', lang);
+    }
+
+    const savedLang = localStorage.getItem('lang') || navigator.language.split('-')[0] || 'en';
+    const lang = translations[savedLang] ? savedLang : 'en';
+    applyLanguage(lang);
+    document.getElementById('langSelect').value = lang;
+    document.getElementById('langSelect').addEventListener('change', e => applyLanguage(e.target.value));
+  </script>
 </body>
 </html>
