@@ -3,107 +3,170 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>YearnaZ — Find it. Return it. Fast.</title>
-  <meta name="description" content="Reunite with lost items across airports, transit, hotels, and campuses.">
+  <title>YearnaZ — Lost & Found for Gen Z</title>
+  <meta name="description" content="Lost your stuff? Someone found it. Reunite fast with the kindness network.">
+  
+  <!-- Clash Grotesk Font -->
+  <link href="https://fonts.googleapis.com/css2?family=ClashGrotesk:wght@400;600;700&display=swap" rel="stylesheet">
+  
   <style>
     :root {
-      --bg: #f8fafc;
-      --text: #0f172a;
-      --card-bg: #ffffff;
-      --primary: #6e8efb;
+      --bg: #fdfcff;
+      --text: #1a1a2e;
+      --card-bg: white;
+      --primary: #4facfe;
       --accent: #ff6b6b;
-      --border: rgba(0,0,0,0.1);
-      --shadow: 0 4px 12px rgba(0,0,0,0.05);
+      --border: #f0f4ff;
     }
     [data-theme="dark"] {
-      --bg: #0f172a;
-      --text: #f8fafc;
-      --card-bg: #1e293b;
-      --border: rgba(255,255,255,0.1);
+      --bg: #0d0d1a;
+      --text: #f0f4ff;
+      --card-bg: #161625;
+      --border: #25253a;
     }
+
     * { margin: 0; padding: 0; box-sizing: border-box; }
     body {
-      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      font-family: 'ClashGrotesk', -apple-system, sans-serif;
       background: var(--bg);
       color: var(--text);
-      line-height: 1.6;
-      transition: background 0.3s, color 0.3s;
+      line-height: 1.5;
+      transition: background 0.3s;
     }
     .container { width: 90%; max-width: 800px; margin: 0 auto; padding: 20px; }
+
+    /* Nav */
     nav {
       display: flex;
       justify-content: space-between;
       align-items: center;
       padding: 16px 0;
-      border-bottom: 1px solid var(--border);
     }
-    .logo { font-size: 1.4rem; font-weight: 700; display: flex; align-items: center; gap: 8px; }
-    .logo svg { width: 28px; height: 28px; }
+    .logo { 
+      font-size: 1.6rem; 
+      font-weight: 700; 
+      background: linear-gradient(135deg, var(--primary), var(--accent));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
     .controls { display: flex; gap: 12px; }
     select, button {
-      padding: 6px 12px;
-      border-radius: 6px;
-      border: 1px solid var(--border);
+      padding: 8px 14px;
+      border-radius: 12px;
+      border: 2px solid var(--border);
       background: var(--card-bg);
       color: var(--text);
-      cursor: pointer;
-    }
-    .hero { text-align: center; padding: 40px 0; }
-    h1 { font-size: 2rem; margin-bottom: 12px; }
-    .subtitle { opacity: 0.85; margin-bottom: 30px; }
-    .search-box {
-      background: var(--card-bg);
-      padding: 24px;
-      border-radius: 16px;
-      box-shadow: var(--shadow);
-      margin: 30px 0;
-    }
-    input, button {
-      width: 100%;
-      padding: 12px;
-      margin: 8px 0;
-      border: 1px solid var(--border);
-      border-radius: 8px;
-    }
-    button {
-      background: var(--primary);
-      color: white;
-      border: none;
       font-weight: 600;
       cursor: pointer;
+      transition: all 0.2s;
     }
-    #results { margin-top: 20px; }
-    .result-item {
-      padding: 12px;
-      border-bottom: 1px solid var(--border);
+    select:hover, button:hover {
+      transform: translateY(-2px);
     }
+
+    /* Hero */
+    .hero {
+      text-align: center;
+      padding: 50px 0 30px;
+    }
+    h1 {
+      font-size: 2.5rem;
+      font-weight: 800;
+      margin-bottom: 16px;
+      line-height: 1.2;
+    }
+    .subtitle {
+      font-size: 1.2rem;
+      opacity: 0.9;
+      max-width: 600px;
+      margin: 0 auto 30px;
+    }
+
+    /* Animated CTA Buttons */
+    .cta-group {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      max-width: 400px;
+      margin: 0 auto 40px;
+    }
+    .btn {
+      padding: 18px;
+      border-radius: 18px;
+      font-size: 1.2rem;
+      font-weight: 700;
+      text-align: center;
+      cursor: pointer;
+      transition: all 0.25s ease;
+      border: none;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      box-shadow: 0 6px 20px rgba(79, 172, 254, 0.3);
+    }
+    .btn-primary {
+      background: linear-gradient(135deg, var(--primary), #4361ee);
+      color: white;
+    }
+    .btn-secondary {
+      background: linear-gradient(135deg, var(--accent), #ff5252);
+      color: white;
+    }
+    .btn:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 10px 25px rgba(79, 172, 254, 0.4);
+    }
+    .btn:active {
+      transform: translateY(0);
+    }
+
+    /* Social Proof */
+    .proof {
+      text-align: center;
+      opacity: 0.85;
+      font-size: 0.95rem;
+      margin-top: 20px;
+    }
+
+    /* Footer */
     footer {
       text-align: center;
-      padding: 30px 0;
+      padding: 40px 0 20px;
       opacity: 0.8;
       font-size: 0.9rem;
-      border-top: 1px solid var(--border);
-      margin-top: 40px;
     }
-    footer a { color: var(--primary); text-decoration: none; margin: 0 8px; }
+    footer a {
+      color: var(--primary);
+      text-decoration: none;
+      margin: 0 10px;
+    }
+
+    /* Animation: floating emoji */
+    @keyframes float {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-10px); }
+    }
+    .emoji {
+      animation: float 3s ease-in-out infinite;
+      display: inline-block;
+      font-size: 1.4rem;
+    }
+
+    /* Responsive */
+    @media (min-width: 768px) {
+      .cta-group { flex-direction: row; }
+      .btn { max-width: 220px; }
+    }
   </style>
 </head>
 <body>
   <div class="container">
     <nav>
-      <div class="logo">
-        <svg viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg">
-          <defs>
-            <linearGradient id="logoGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-              <stop offset="0%" stop-color="#6e8efb" />
-              <stop offset="100%" stop-color="#a777e3" />
-            </linearGradient>
-          </defs>
-          <path d="M16 6 C22 6 26 10 26 16 C26 22 22 26 16 26 C10 26 6 22 6 16 C6 12 8 8 12 6" fill="none" stroke="url(#logoGrad)" stroke-width="2" stroke-linecap="round"/>
-          <path d="M20 22 L24 18 L20 14" fill="none" stroke="url(#logoGrad)" stroke-width="2" stroke-linejoin="round"/>
-        </svg>
-        YearnaZ
-      </div>
+      <div class="logo">YearnaZ</div>
       <div class="controls">
         <select id="langSelect">
           <option value="en">English</option>
@@ -125,25 +188,20 @@
 
     <main>
       <section class="hero">
-        <h1 id="heroTitle">YearnaZ — Find it. Return it. Fast.</h1>
-        <p class="subtitle" id="heroSubtitle">Lost on the go? Reconnect with your things.</p>
+        <h1>Lost something?<br><span class="emoji">😢</span> Someone’s got it.</h1>
+        <p class="subtitle">Join 32,481 kind humans who return what’s lost. Reunite in minutes.</p>
+
+        <div class="cta-group">
+          <a href="report-lost.html" class="btn btn-primary">🔍 Find My Thing</a>
+          <a href="report-found.html" class="btn btn-secondary">❤️ I Found Something</a>
+        </div>
+
+        <p class="proof">“Found my passport at JFK in 8 mins!” — Maya, 22</p>
       </section>
-
-      <div class="search-box">
-        <h2 id="searchTitle">Search Lost Items</h2>
-        <input type="text" id="searchInput" placeholder="e.g., Black wallet, Silver AirPods">
-        <button id="searchBtn">Search Now</button>
-        <div id="results"></div>
-      </div>
-
-      <p style="text-align:center; margin: 20px 0;">
-        <a href="report-lost.html" style="color:#6e8efb;">→ Report a lost item</a> | 
-        <a href="report-found.html" style="color:#6e8efb;">→ Report a found item</a>
-      </p>
     </main>
 
     <footer>
-      <p>© 2025 YearnaZ. Reuniting people with what matters.</p>
+      <p>© 2025 YearnaZ. Kindness, powered by community.</p>
       <p>
         <a href="about.html">About</a> • 
         <a href="privacy.html">Privacy</a> • 
@@ -160,7 +218,7 @@
     d.getElementsByTagName("head")[0].appendChild(s); })();
   </script>
 
-  <script type="module">
+  <script>
     // ===== THEME =====
     const themeBtn = document.getElementById('themeBtn');
     const isDark = localStorage.getItem('theme') === 'dark';
@@ -183,75 +241,106 @@
 
     // ===== LANGUAGE =====
     const translations = {
-      en: { heroTitle: "YearnaZ — Find it. Return it. Fast.", heroSubtitle: "Lost on the go? Reconnect with your things.", searchTitle: "Search Lost Items" },
-      es: { heroTitle: "YearnaZ — Encuéntralo. Devuélvelo. Rápido.", heroSubtitle: "¿Perdiste algo? Reconéctate con tus pertenencias.", searchTitle: "Buscar Objetos Perdidos" },
-      fr: { heroTitle: "YearnaZ — Trouvez-le. Rendez-le. Rapidement.", heroSubtitle: "Perdu en déplacement ? Retrouvez vos affaires.", searchTitle: "Rechercher des objets perdus" },
-      de: { heroTitle: "YearnaZ — Finde es. Gib es zurück. Schnell.", heroSubtitle: "Unterwegs verloren? Verbinde dich wieder mit deinen Dingen.", searchTitle: "Verlorene Gegenstände suchen" },
-      pt: { heroTitle: "YearnaZ — Encontre. Devolva. Rápido.", heroSubtitle: "Perdeu algo? Reconecte-se com seus pertences.", searchTitle: "Buscar Itens Perdidos" },
-      it: { heroTitle: "YearnaZ — Trovalo. Restituiscilo. Veloce.", heroSubtitle: "Perso qualcosa? Riconnettiti con i tuoi oggetti.", searchTitle: "Cerca Oggetti Smarriti" },
-      nl: { heroTitle: "YearnaZ — Vind het. Geef het terug. Snel.", heroSubtitle: "Onderweg iets verloren? Herstel de verbinding met je spullen.", searchTitle: "Zoek Verloren Voorwerpen" },
-      ru: { heroTitle: "YearnaZ — Найди. Верни. Быстро.", heroSubtitle: "Потеряли что-то в пути? Верните связь с вещами.", searchTitle: "Поиск потерянных вещей" },
-      ja: { heroTitle: "YearnaZ — 見つけて。返して。素早く。", heroSubtitle: "移動中に紛失？物を再接続。", searchTitle: "紛失物を検索" },
-      ko: { heroTitle: "YearnaZ — 찾고. 돌려주고. 빠르게.", heroSubtitle: "이동 중 분실? 물건을 다시 연결하세요.", searchTitle: "분실물 검색" },
-      zh: { heroTitle: "YearnaZ — 找到它。归还它。快速。", heroSubtitle: "途中丢失？重新连接您的物品。", searchTitle: "搜索丢失物品" },
-      ar: { heroTitle: "YearnaZ — اعثر عليه. أعدْه. بسرعة.", heroSubtitle: "هل فقدت شيئًا أثناء التنقّل؟ أعد الاتصال بأشيائك.", searchTitle: "البحث عن أشياء مفقودة" }
+      en: { 
+        hero1: "Lost something?", 
+        hero2: "Someone’s got it.",
+        subtitle: "Join 32,481 kind humans who return what’s lost. Reunite in minutes.",
+        cta1: "🔍 Find My Thing",
+        cta2: "❤️ I Found Something"
+      },
+      es: { 
+        hero1: "¿Perdiste algo?", 
+        hero2: "Alguien lo tiene.",
+        subtitle: "Únete a 32,481 personas amables que devuelven lo perdido. Reencuéntrate en minutos.",
+        cta1: "🔍 Encuentra Mi Cosa",
+        cta2: "❤️ Encontré Algo"
+      },
+      fr: { 
+        hero1: "Perdu quelque chose ?", 
+        hero2: "Quelqu’un l’a.",
+        subtitle: "Rejoignez 32 481 personnes bienveillantes qui rendent ce qui est perdu. Réunissez-vous en minutes.",
+        cta1: "🔍 Trouve Mon Truc",
+        cta2: "❤️ J’ai Trouvé Quelque Chose"
+      },
+      de: { 
+        hero1: "Etwas verloren?", 
+        hero2: "Jemand hat es.",
+        subtitle: "Schließe dich 32.481 freundlichen Menschen an, die Verlorenes zurückgeben. Vereint in Minuten.",
+        cta1: "🔍 Finde Mein Ding",
+        cta2: "❤️ Ich Habe Etwas Gefunden"
+      },
+      pt: { 
+        hero1: "Perdeu algo?", 
+        hero2: "Alguém tem.",
+        subtitle: "Junte-se a 32.481 pessoas gentis que devolvem o que foi perdido. Reencontre-se em minutos.",
+        cta1: "🔍 Encontre Minha Coisa",
+        cta2: "❤️ Encontrei Algo"
+      },
+      it: { 
+        hero1: "Hai perso qualcosa?", 
+        hero2: "Qualcuno ce l’ha.",
+        subtitle: "Unisciti a 32.481 persone gentili che restituiscono ciò che è perso. Riunisciti in pochi minuti.",
+        cta1: "🔍 Trova La Mia Cosa",
+        cta2: "❤️ Ho Trovato Qualcosa"
+      },
+      nl: { 
+        hero1: "Iets verloren?", 
+        hero2: "Iemand heeft het.",
+        subtitle: "Sluit je aan bij 32.481 vriendelijke mensen die verloren spullen teruggeven. Herenig in minuten.",
+        cta1: "🔍 Vind Mijn Spul",
+        cta2: "❤️ Ik Heb Iets Gevonden"
+      },
+      ru: { 
+        hero1: "Потеряли что-то?", 
+        hero2: "Кто-то это нашел.",
+        subtitle: "Присоединяйтесь к 32 481 добрым людям, которые возвращают потерянное. Воссоединяйтесь за минуты.",
+        cta1: "🔍 Найди Мою Вещь",
+        cta2: "❤️ Я Нашел Что-то"
+      },
+      ja: { 
+        hero1: "何かを無くしましたか？", 
+        hero2: "誰かが持っています。",
+        subtitle: "失くした物を返す32,481人の優しい仲間に参加しましょう。数分で再会できます。",
+        cta1: "🔍 私の物を探して",
+        cta2: "❤️ 見つけました"
+      },
+      ko: { 
+        hero1: "무언가를 잃어버리셨나요?", 
+        hero2: "누군가 가지고 있어요.",
+        subtitle: "잃어버린 물건을 돌려주는 32,481명의 친절한 사람들과 함께하세요. 몇 분 안에 재회하세요.",
+        cta1: "🔍 내 물건 찾기",
+        cta2: "❤️ 무언가를 찾았어요"
+      },
+      zh: { 
+        hero1: "丢了东西？", 
+        hero2: "有人捡到了。",
+        subtitle: "加入32,481名归还失物的善良人群。几分钟内重聚。",
+        cta1: "🔍 找回我的东西",
+        cta2: "❤️ 我捡到了东西"
+      },
+      ar: { 
+        hero1: "فقدت شيئًا؟", 
+        hero2: "الشخص ما زال يملكه.",
+        subtitle: "انضم إلى 32,481 شخصًا لطفاء يعيدون الأشياء المفقودة. التقيا في دقائق.",
+        cta1: "🔍 اعثر على شي",
+        cta2: "❤️ وجدت شيئًا"
+      }
     };
 
     function updateLang(lang) {
-      if (translations[lang]) {
-        document.getElementById('heroTitle').textContent = translations[lang].heroTitle;
-        document.getElementById('heroSubtitle').textContent = translations[lang].heroSubtitle;
-        document.getElementById('searchTitle').textContent = translations[lang].searchTitle;
-        document.getElementById('searchInput').placeholder = 
-          lang === 'es' ? 'ej. Billetera negra, AirPods plateados' :
-          lang === 'fr' ? 'ex. Portefeuille noir, AirPods argentés' :
-          'e.g., Black wallet, Silver AirPods';
-      }
+      const t = translations[lang] || translations.en;
+      document.querySelector('h1').innerHTML = `${t.hero1}<br><span class="emoji">😢</span> ${t.hero2}`;
+      document.querySelector('.subtitle').textContent = t.subtitle;
+      document.querySelectorAll('.btn')[0].innerHTML = t.cta1;
+      document.querySelectorAll('.btn')[1].innerHTML = t.cta2;
       localStorage.setItem('lang', lang);
     }
 
     const savedLang = localStorage.getItem('lang') || navigator.language.split('-')[0] || 'en';
-    updateLang(translations[savedLang] ? savedLang : 'en');
-    document.getElementById('langSelect').value = savedLang;
+    const lang = translations[savedLang] ? savedLang : 'en';
+    updateLang(lang);
+    document.getElementById('langSelect').value = lang;
     document.getElementById('langSelect').addEventListener('change', e => updateLang(e.target.value));
-
-    // ===== SUPABASE SEARCH =====
-    import { createClient } from 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js/+esm';
-
-    const supabase = createClient(
-      'YOUR_SUPABASE_URL',
-      'YOUR_SUPABASE_ANON_KEY'
-    );
-
-    document.getElementById('searchBtn').addEventListener('click', async () => {
-      const query = document.getElementById('searchInput').value.trim();
-      if (!query) return;
-
-      const { data, error } = await supabase
-        .from('reports')
-        .select('item_name, location, description, type')
-        .or(`item_name.ilike.%${query}%,description.ilike.%${query}%`)
-        .limit(5);
-
-      const resultsDiv = document.getElementById('results');
-      if (error) {
-        resultsDiv.innerHTML = `<p style="color:red;">Error: ${error.message}</p>`;
-        return;
-      }
-
-      if (data.length === 0) {
-        resultsDiv.innerHTML = '<p>No matches found.</p>';
-        return;
-      }
-
-      resultsDiv.innerHTML = data.map(item => 
-        `<div class="result-item">
-          <strong>${item.item_name}</strong> (${item.type})<br>
-          ${item.description}<br>
-          <em>Location: ${item.location}</em>
-        </div>`
-      ).join('');
-    });
   </script>
 </body>
 </html>
