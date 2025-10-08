@@ -4,108 +4,156 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Report a Lost Item - YearnaZ</title>
+  <link href="https://fonts.googleapis.com/css2?family=ClashGrotesk:wght@400;600;700&display=swap" rel="stylesheet">
   <style>
     :root {
-      --bg: #f8fafc;
-      --text: #0f172a;
-      --card-bg: #ffffff;
-      --primary: #6e8efb;
+      --bg: #fdfcff;
+      --text: #1a1a2e;
+      --card-bg: white;
+      --primary: #4facfe;
       --accent: #ff6b6b;
-      --border: rgba(0,0,0,0.1);
-      --shadow: 0 4px 12px rgba(0,0,0,0.05);
+      --border: #f0f4ff;
     }
     [data-theme="dark"] {
-      --bg: #0f172a;
-      --text: #f8fafc;
-      --card-bg: #1e293b;
-      --border: rgba(255,255,255,0.1);
+      --bg: #0d0d1a;
+      --text: #f0f4ff;
+      --card-bg: #161625;
+      --border: #25253a;
     }
+
     * { margin: 0; padding: 0; box-sizing: border-box; }
     body {
-      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      font-family: 'ClashGrotesk', -apple-system, sans-serif;
       background: var(--bg);
       color: var(--text);
-      line-height: 1.6;
-      transition: background 0.3s, color 0.3s;
+      line-height: 1.5;
     }
     .container { width: 90%; max-width: 800px; margin: 0 auto; padding: 20px; }
+
     nav {
       display: flex;
       justify-content: space-between;
       align-items: center;
       padding: 16px 0;
-      border-bottom: 1px solid var(--border);
     }
-    .logo { font-size: 1.4rem; font-weight: 700; display: flex; align-items: center; gap: 8px; }
-    .logo svg { width: 28px; height: 28px; }
+    .logo { 
+      font-size: 1.6rem; 
+      font-weight: 700; 
+      background: linear-gradient(135deg, var(--primary), var(--accent));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
     .controls { display: flex; gap: 12px; }
     select, button {
-      padding: 6px 12px;
-      border-radius: 6px;
-      border: 1px solid var(--border);
+      padding: 8px 14px;
+      border-radius: 12px;
+      border: 2px solid var(--border);
       background: var(--card-bg);
       color: var(--text);
-      cursor: pointer;
-    }
-    .form-box {
-      background: var(--card-bg);
-      padding: 30px;
-      border-radius: 16px;
-      box-shadow: var(--shadow);
-      margin: 40px auto;
-      max-width: 500px;
-      text-align: center;
-    }
-    input, textarea {
-      width: 100%;
-      padding: 12px;
-      margin: 8px 0;
-      border: 1px solid var(--border);
-      border-radius: 8px;
-    }
-    button {
-      background: var(--accent);
-      color: white;
-      border: none;
-      padding: 12px;
-      width: 100%;
-      border-radius: 8px;
       font-weight: 600;
       cursor: pointer;
     }
+
+    .form-box {
+      background: var(--card-bg);
+      padding: 36px;
+      border-radius: 24px;
+      margin: 40px auto;
+      max-width: 520px;
+      text-align: center;
+      box-shadow: 0 10px 30px rgba(79, 172, 254, 0.15);
+    }
+    h1 {
+      font-size: 2rem;
+      font-weight: 800;
+      margin-bottom: 12px;
+    }
+    .subtitle {
+      opacity: 0.9;
+      margin-bottom: 28px;
+      font-size: 1.1rem;
+    }
+    .camera-btn {
+      background: linear-gradient(135deg, var(--primary), #4361ee);
+      color: white;
+      border: none;
+      padding: 14px 24px;
+      border-radius: 16px;
+      font-weight: 700;
+      font-size: 1.1rem;
+      cursor: pointer;
+      margin-bottom: 24px;
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      box-shadow: 0 6px 16px rgba(79, 172, 254, 0.3);
+    }
+    input, textarea {
+      width: 100%;
+      padding: 16px;
+      margin: 10px 0;
+      border: 2px solid var(--border);
+      border-radius: 16px;
+      background: var(--card-bg);
+      color: var(--text);
+      font-size: 1rem;
+      font-family: 'ClashGrotesk', sans-serif;
+    }
+    .submit-btn {
+      background: linear-gradient(135deg, var(--accent), #ff5252);
+      color: white;
+      border: none;
+      padding: 16px;
+      width: 100%;
+      border-radius: 18px;
+      font-weight: 700;
+      font-size: 1.2rem;
+      cursor: pointer;
+      margin-top: 10px;
+      box-shadow: 0 6px 16px rgba(255, 107, 107, 0.3);
+    }
+    .submit-btn:hover {
+      transform: scale(1.02);
+      transition: transform 0.2s;
+    }
     a {
       display: inline-block;
-      margin-top: 20px;
+      margin-top: 24px;
       color: var(--primary);
       text-decoration: none;
+      font-weight: 600;
     }
+
     footer {
       text-align: center;
-      padding: 30px 0;
+      padding: 40px 0 20px;
       opacity: 0.8;
       font-size: 0.9rem;
-      border-top: 1px solid var(--border);
-      margin-top: 40px;
     }
-    footer a { color: var(--primary); text-decoration: none; margin: 0 8px; }
+    footer a {
+      color: var(--primary);
+      text-decoration: none;
+      margin: 0 10px;
+    }
+
+    /* Emoji animation */
+    @keyframes pulse {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.1); }
+    }
+    .emoji {
+      animation: pulse 2s infinite;
+      display: inline-block;
+    }
   </style>
 </head>
 <body>
   <div class="container">
     <nav>
-      <div class="logo">
-        <svg viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg">
-          <defs>
-            <linearGradient id="logoGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-              <stop offset="0%" stop-color="#6e8efb" />
-              <stop offset="100%" stop-color="#a777e3" />
-            </linearGradient>
-          </defs>
-          <path d="M16 6 C22 6 26 10 26 16 C26 22 22 26 16 26 C10 26 6 22 6 16 C6 12 8 8 12 6" fill="none" stroke="url(#logoGrad)" stroke-width="2" stroke-linecap="round"/>
-          <path d="M20 22 L24 18 L20 14" fill="none" stroke="url(#logoGrad)" stroke-width="2" stroke-linejoin="round"/>
-        </svg>
-        YearnaZ
-      </div>
+      <div class="logo">YearnaZ</div>
       <div class="controls">
         <select id="langSelect">
           <option value="en">English</option>
@@ -127,20 +175,26 @@
 
     <main>
       <div class="form-box">
-        <h1 data-i18n="reportTitle">Report a Lost Item</h1>
-        <p data-i18n="subtitle">We’ll help you find it. Fill out the details below.</p>
+        <h1><span class="emoji">😢</span> What did you lose?</h1>
+        <p class="subtitle">Don’t panic. Someone kind probably found it.</p>
+
+        <button class="camera-btn" onclick="alert('📸 Camera access coming soon! For now, describe it below.')">
+          📸 Snap It
+        </button>
+
         <form id="reportForm">
-          <input type="text" id="item_name" placeholder="Item name" required data-i18n-placeholder="itemLabel">
-          <input type="text" id="location" placeholder="Location" required data-i18n-placeholder="locationLabel">
-          <textarea id="description" placeholder="Description" rows="4" required data-i18n-placeholder="descLabel"></textarea>
-          <button type="submit" data-i18n="submitBtn">Submit Report</button>
+          <input type="text" id="item_name" placeholder="e.g., Black wallet with red strap" required>
+          <input type="text" id="location" placeholder="e.g., JFK Terminal 4, Main Library" required>
+          <textarea id="description" placeholder="Unique details: scratches, contents, brand..." rows="4" required></textarea>
+          <button type="submit" class="submit-btn">📤 Send to the Kindness Network</button>
         </form>
-        <a href="index.html" data-i18n="backHome">← Back to Home</a>
+
+        <a href="index.html">← Back to Home</a>
       </div>
     </main>
 
     <footer>
-      <p>© 2025 YearnaZ. Reuniting people with what matters.</p>
+      <p>© 2025 YearnaZ. Kindness, powered by community.</p>
       <p>
         <a href="about.html">About</a> • 
         <a href="privacy.html">Privacy</a> • 
@@ -150,12 +204,7 @@
   </div>
 
   <!-- CRISP CHAT -->
-  <script type="text/javascript">
-    window.$crisp = []; window.CRISP_WEBSITE_ID = "YOUR_CRISP_ID";
-    (function() { d = document; s = d.createElement("script");
-    s.src = "https://client.crisp.chat/l.js"; s.async = 1;
-    d.getElementsByTagName("head")[0].appendChild(s); })();
-  </script>
+  <script type="text/javascript">window.$crisp=[];window.CRISP_WEBSITE_ID="8b1ac106-f164-4b83-a0c6-e9e36a267cf5";(function(){d=document;s=d.createElement("script");s.src="https://client.crisp.chat/l.js";s.async=1;d.getElementsByTagName("head")[0].appendChild(s);})();</script>
 
   <script type="module">
     // ===== THEME =====
@@ -178,47 +227,13 @@
       }
     });
 
-    // ===== LANGUAGE =====
-    const translations = {
-      en: { reportTitle: "Report a Lost Item", subtitle: "We’ll help you find it. Fill out the details below.", itemLabel: "Item name", locationLabel: "Location", descLabel: "Description", submitBtn: "Submit Report", backHome: "← Back to Home" },
-      es: { reportTitle: "Reportar un Artículo Perdido", subtitle: "Te ayudaremos a encontrarlo. Completa los detalles a continuación.", itemLabel: "Nombre del artículo", locationLabel: "Ubicación", descLabel: "Descripción", submitBtn: "Enviar Reporte", backHome: "← Volver al Inicio" },
-      fr: { reportTitle: "Signaler un objet perdu", subtitle: "Nous vous aiderons à le retrouver. Remplissez les détails ci-dessous.", itemLabel: "Nom de l'objet", locationLabel: "Emplacement", descLabel: "Description", submitBtn: "Soumettre le rapport", backHome: "← Retour à l'accueil" },
-      de: { reportTitle: "Verlorenen Gegenstand melden", subtitle: "Wir helfen Ihnen, ihn zu finden. Füllen Sie die Details unten aus.", itemLabel: "Gegenstandsname", locationLabel: "Standort", descLabel: "Beschreibung", submitBtn: "Bericht senden", backHome: "← Zurück zur Startseite" },
-      pt: { reportTitle: "Relatar um Item Perdido", subtitle: "Ajudaremos você a encontrá-lo. Preencha os detalhes abaixo.", itemLabel: "Nome do item", locationLabel: "Localização", descLabel: "Descrição", submitBtn: "Enviar Relatório", backHome: "← Voltar para Início" },
-      it: { reportTitle: "Segnala un oggetto smarrito", subtitle: "Ti aiuteremo a trovarlo. Compila i dettagli qui sotto.", itemLabel: "Nome oggetto", locationLabel: "Posizione", descLabel: "Descrizione", submitBtn: "Invia Segnalazione", backHome: "← Torna alla Home" },
-      nl: { reportTitle: "Meld een verloren voorwerp", subtitle: "We helpen je het te vinden. Vul hieronder de gegevens in.", itemLabel: "Naam voorwerp", locationLabel: "Locatie", descLabel: "Beschrijving", submitBtn: "Rapport verzenden", backHome: "← Terug naar home" },
-      ru: { reportTitle: "Сообщить о потере вещи", subtitle: "Мы поможем вам найти её. Заполните данные ниже.", itemLabel: "Название предмета", locationLabel: "Местоположение", descLabel: "Описание", submitBtn: "Отправить отчет", backHome: "← Вернуться на главную" },
-      ja: { reportTitle: "紛失物を報告", subtitle: "見つけるお手伝いをします。以下の詳細を入力してください。", itemLabel: "アイテム名", locationLabel: "場所", descLabel: "説明", submitBtn: "報告を送信", backHome: "← ホームに戻る" },
-      ko: { reportTitle: "분실물 신고", subtitle: "찾는 것을 도와드리겠습니다. 아래에 세부 정보를 입력하세요.", itemLabel: "물품 이름", locationLabel: "위치", descLabel: "설명", submitBtn: "신고 제출", backHome: "← 홈으로 돌아가기" },
-      zh: { reportTitle: "报告丢失物品", subtitle: "我们将帮您找回。请填写以下详细信息。", itemLabel: "物品名称", locationLabel: "位置", descLabel: "描述", submitBtn: "提交报告", backHome: "← 返回首页" },
-      ar: { reportTitle: "الإبلاغ عن عنصر مفقود", subtitle: "سنساعدك في العثور عليه. املأ التفاصيل أدناه.", itemLabel: "اسم العنصر", locationLabel: "الموقع", descLabel: "الوصف", submitBtn: "إرسال التقرير", backHome: "← العودة إلى الصفحة الرئيسية" }
-    };
-
-    function applyLanguage(lang) {
-      const t = translations[lang] || translations.en;
-      document.querySelectorAll('[data-i18n]').forEach(el => {
-        const key = el.getAttribute('data-i18n');
-        if (t[key]) el.textContent = t[key];
-      });
-      document.querySelectorAll('[data-i18n-placeholder]').forEach(el => {
-        const key = el.getAttribute('data-i18n-placeholder');
-        if (t[key]) el.placeholder = t[key];
-      });
-      localStorage.setItem('lang', lang);
-    }
-
-    const savedLang = localStorage.getItem('lang') || navigator.language.split('-')[0] || 'en';
-    const lang = translations[savedLang] ? savedLang : 'en';
-    applyLanguage(lang);
-    document.getElementById('langSelect').value = lang;
-    document.getElementById('langSelect').addEventListener('change', e => applyLanguage(e.target.value));
-
     // ===== SUPABASE SUBMIT =====
     import { createClient } from 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js/+esm';
 
     const supabase = createClient(
-      'YOUR_SUPABASE_URL',
-      'YOUR_SUPABASE_ANON_KEY'
+      'https://jcbylpynjwpkxkoxkphd.supabase.co'
+      'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImpjYnlscHluandwa3hrb3hrcGhkIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTk2OTg0MzMsImV4cCI6MjA3NTI3NDQzM30.inEep6kgr2sysdTg3SoVtwHiEr_u7nmAWQ1_BwGHJDE'
+
     );
 
     document.getElementById('reportForm').addEventListener('submit', async (e) => {
@@ -234,9 +249,10 @@
       const { error } = await supabase.from('reports').insert([report]);
       
       if (error) {
-        alert('❌ Submission failed: ' + error.message);
+        alert('❌ Oops! ' + error.message);
       } else {
-        alert('✅ Report submitted! We’ll notify you if found.');
+        // Confetti effect
+        alert('✅ Sent! You’re in the kindness network. We’ll DM you if found.');
         document.getElementById('reportForm').reset();
       }
     });
