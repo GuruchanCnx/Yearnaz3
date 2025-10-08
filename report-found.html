@@ -46,7 +46,6 @@
       align-items: center;
       gap: 8px;
     }
-    .logo svg { width: 28px; height: 28px; }
     .controls { display: flex; gap: 12px; }
     select, button {
       padding: 8px 14px;
@@ -120,33 +119,24 @@
       text-decoration: none;
       margin: 0 10px;
     }
-    @keyframes float {
-      0%, 100% { transform: translateY(0); }
-      50% { transform: translateY(-10px); }
+
+    /* Hero Animation */
+    @keyframes heroFloat {
+      0%, 100% { transform: translateY(0) scale(1); }
+      50% { transform: translateY(-15px) scale(1.05); }
     }
-    .emoji {
-      animation: float 3s ease-in-out infinite;
-      display: inline-block;
-      font-size: 2.5rem;
+    .hero-message {
+      animation: heroFloat 2.5s ease-in-out infinite;
+      font-size: 2.2rem;
+      margin-bottom: 16px;
+      display: block;
     }
   </style>
 </head>
 <body>
   <div class="container">
     <nav>
-      <div class="logo">
-        <svg viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg">
-          <defs>
-            <linearGradient id="logoGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-              <stop offset="0%" stop-color="#6e8efb" />
-              <stop offset="100%" stop-color="#a777e3" />
-            </linearGradient>
-          </defs>
-          <path d="M16 6 C22 6 26 10 26 16 C26 22 22 26 16 26 C10 26 6 22 6 16 C6 12 8 8 12 6" fill="none" stroke="url(#logoGrad)" stroke-width="2" stroke-linecap="round"/>
-          <path d="M20 22 L24 18 L20 14" fill="none" stroke="url(#logoGrad)" stroke-width="2" stroke-linejoin="round"/>
-        </svg>
-        YearnaZ
-      </div>
+      <div class="logo">YearnaZ</div>
       <div class="controls">
         <select id="langSelect">
           <option value="en">English</option>
@@ -168,18 +158,17 @@
 
     <main>
       <div class="form-box">
-        <span class="emoji">❤️</span>
-        <h1>You’re a <span class="emoji">hero</span>!</h1>
-        <p class="subtitle">Thank you for helping someone reunite with what matters.</p>
+        <span class="hero-message" id="heroMessage">❤️ You’re a hero!</span>
+        <p class="subtitle" id="subtitle">Thank you for helping someone reunite with what matters.</p>
 
         <form id="foundForm">
           <input type="text" id="item_name" placeholder="Item name" required>
           <input type="text" id="location" placeholder="Where you found it" required>
-          <textarea id="description" placeholder="Distinctive features: color, brand, damage..." rows="4" required></textarea>
-          <button type="submit" class="submit-btn">✅ Submit Found Item</button>
+          <textarea id="description" placeholder="Distinctive features" rows="4" required></textarea>
+          <button type="submit" class="submit-btn" id="submitBtn">✅ Submit Found Item</button>
         </form>
 
-        <a href="index.html">← Back to Home</a>
+        <a href="index.html" id="backLink">← Back to Home</a>
       </div>
     </main>
 
@@ -188,15 +177,16 @@
       <p>
         <a href="about.html">About</a> • 
         <a href="privacy.html">Privacy</a> • 
-        <a href="contact.html">Contact</a>
+        <a href="contact.html">Contact</a> • 
+        <a href="hero-wall.html">Hero Wall</a>
       </p>
     </footer>
   </div>
 
-  <!-- CRISP CHAT -->
   <script type="text/javascript">window.$crisp=[];window.CRISP_WEBSITE_ID="8b1ac106-f164-4b83-a0c6-e9e36a267cf5";(function(){d=document;s=d.createElement("script");s.src="https://client.crisp.chat/l.js";s.async=1;d.getElementsByTagName("head")[0].appendChild(s);})();</script>
 
   <script type="module">
+    // Theme Toggle
     const themeBtn = document.getElementById('themeBtn');
     const isDark = localStorage.getItem('theme') === 'dark';
     if (isDark) {
@@ -216,30 +206,31 @@
       }
     });
 
+    // Multilingual Hero Messages
     const translations = {
-      en: { title: "You’re a hero!", subtitle: "Thank you for helping someone reunite with what matters.", item: "Item name", location: "Where you found it", desc: "Distinctive features", submit: "✅ Submit Found Item", back: "← Back to Home" },
-      es: { title: "¡Eres un héroe!", subtitle: "Gracias por ayudar a alguien a reencontrarse con lo que importa.", item: "Nombre del artículo", location: "Dónde lo encontraste", desc: "Características distintivas", submit: "✅ Enviar Artículo Encontrado", back: "← Volver al Inicio" },
-      fr: { title: "Vous êtes un héros !", subtitle: "Merci d’aider quelqu’un à retrouver ce qui compte.", item: "Nom de l'objet", location: "Où vous l'avez trouvé", desc: "Caractéristiques distinctives", submit: "✅ Soumettre l'objet trouvé", back: "← Retour à l'accueil" },
-      de: { title: "Du bist ein Held!", subtitle: "Danke, dass du jemandem hilfst, das Wichtige wiederzufinden.", item: "Gegenstandsname", location: "Wo Sie es gefunden haben", desc: "Kennzeichnende Merkmale", submit: "✅ Gefundenen Gegenstand senden", back: "← Zurück zur Startseite" },
-      pt: { title: "Você é um herói!", subtitle: "Obrigado por ajudar alguém a reencontrar o que importa.", item: "Nome do item", location: "Onde você o encontrou", desc: "Características distintivas", submit: "✅ Enviar Item Encontrado", back: "← Voltar para Início" },
-      it: { title: "Sei un eroe!", subtitle: "Grazie per aver aiutato qualcuno a ritrovare ciò che conta.", item: "Nome oggetto", location: "Dove l'hai trovato", desc: "Caratteristiche distintive", submit: "✅ Invia oggetto trovato", back: "← Torna alla Home" },
-      nl: { title: "Jij bent een held!", subtitle: "Bedankt dat je iemand helpt om het belangrijke terug te vinden.", item: "Naam voorwerp", location: "Waar je het vond", desc: "Kenmerkende eigenschappen", submit: "✅ Gevonden voorwerp verzenden", back: "← Terug naar home" },
-      ru: { title: "Вы герой!", subtitle: "Спасибо, что помогаете кому-то воссоединиться с важным.", item: "Название предмета", location: "Где вы его нашли", desc: "Отличительные черты", submit: "✅ Отправить найденный предмет", back: "← Вернуться на главную" },
-      ja: { title: "あなたはヒーローです！", subtitle: "誰かが大切なものと再会できるようにお手伝いいただきありがとうございます。", item: "アイテム名", location: "見つけた場所", desc: "特徴的な機能", submit: "✅ 発見物を送信", back: "← ホームに戻る" },
-      ko: { title: "당신은 영웅이에요!", subtitle: "누군가 소중한 것을 되찾도록 도와주셔서 감사합니다.", item: "물품 이름", location: "어디서 찾았는지", desc: "특징적인 기능", submit: "✅ 찾은 물건 제출", back: "← 홈으로 돌아가기" },
-      zh: { title: "你是个英雄！", subtitle: "感谢你帮助他人重聚重要物品。", item: "物品名称", location: "您在哪里找到的", desc: "显著特征", submit: "✅ 提交拾获物品", back: "← 返回首页" },
-      ar: { title: "أنت بطل!", subtitle: "شكرًا لك على مساعدة شخص على إعادة الاتصال بشيء مهم.", item: "اسم العنصر", location: "أين وجدته", desc: "الميزات المميزة", submit: "✅ إرسال العنصر الذي وُجد", back: "← العودة إلى الصفحة الرئيسية" }
+      en: { hero: "❤️ You’re a hero!", subtitle: "Thank you for helping someone reunite with what matters.", item: "Item name", location: "Where you found it", desc: "Distinctive features", submit: "✅ Submit Found Item", back: "← Back to Home" },
+      es: { hero: "❤️ ¡Eres un héroe!", subtitle: "Gracias por ayudar a alguien a reencontrarse con lo que importa.", item: "Nombre del artículo", location: "Dónde lo encontraste", desc: "Características distintivas", submit: "✅ Enviar Artículo Encontrado", back: "← Volver al Inicio" },
+      fr: { hero: "❤️ Vous êtes un héros !", subtitle: "Merci d’aider quelqu’un à retrouver ce qui compte.", item: "Nom de l'objet", location: "Où vous l'avez trouvé", desc: "Caractéristiques distinctives", submit: "✅ Soumettre l'objet trouvé", back: "← Retour à l'accueil" },
+      de: { hero: "❤️ Du bist ein Held!", subtitle: "Danke, dass du jemandem hilfst, das Wichtige wiederzufinden.", item: "Gegenstandsname", location: "Wo Sie es gefunden haben", desc: "Kennzeichnende Merkmale", submit: "✅ Gefundenen Gegenstand senden", back: "← Zurück zur Startseite" },
+      pt: { hero: "❤️ Você é um herói!", subtitle: "Obrigado por ajudar alguém a reencontrar o que importa.", item: "Nome do item", location: "Onde você o encontrou", desc: "Características distintivas", submit: "✅ Enviar Item Encontrado", back: "← Voltar para Início" },
+      it: { hero: "❤️ Sei un eroe!", subtitle: "Grazie per aver aiutato qualcuno a ritrovare ciò che conta.", item: "Nome oggetto", location: "Dove l'hai trovato", desc: "Caratteristiche distintive", submit: "✅ Invia oggetto trovato", back: "← Torna alla Home" },
+      nl: { hero: "❤️ Jij bent een held!", subtitle: "Bedankt dat je iemand helpt om het belangrijke terug te vinden.", item: "Naam voorwerp", location: "Waar je het vond", desc: "Kenmerkende eigenschappen", submit: "✅ Gevonden voorwerp verzenden", back: "← Terug naar home" },
+      ru: { hero: "❤️ Вы герой!", subtitle: "Спасибо, что помогаете кому-то воссоединиться с важным.", item: "Название предмета", location: "Где вы его нашли", desc: "Отличительные черты", submit: "✅ Отправить найденный предмет", back: "← Вернуться на главную" },
+      ja: { hero: "❤️ あなたはヒーローです！", subtitle: "誰かが大切なものと再会できるようにお手伝いいただきありがとうございます。", item: "アイテム名", location: "見つけた場所", desc: "特徴的な機能", submit: "✅ 発見物を送信", back: "← ホームに戻る" },
+      ko: { hero: "❤️ 당신은 영웅이에요!", subtitle: "누군가 소중한 것을 되찾도록 도와주셔서 감사합니다.", item: "물품 이름", location: "어디서 찾았는지", desc: "특징적인 기능", submit: "✅ 찾은 물건 제출", back: "← 홈으로 돌아가기" },
+      zh: { hero: "❤️ 你是个英雄！", subtitle: "感谢你帮助他人重聚重要物品。", item: "物品名称", location: "您在哪里找到的", desc: "显著特征", submit: "✅ 提交拾获物品", back: "← 返回首页" },
+      ar: { hero: "❤️ أنت بطل!", subtitle: "شكرًا لك على مساعدة شخص على إعادة الاتصال بشيء مهم.", item: "اسم العنصر", location: "أين وجدته", desc: "الميزات المميزة", submit: "✅ إرسال العنصر الذي وُجد", back: "← العودة إلى الصفحة الرئيسية" }
     };
 
     function applyLang(lang) {
       const t = translations[lang] || translations.en;
-      document.querySelector('h1').innerHTML = `You’re a <span class="emoji">hero</span>!`;
-      document.querySelector('.subtitle').textContent = t.subtitle;
-      document.querySelectorAll('input')[0].placeholder = t.item;
-      document.querySelectorAll('input')[1].placeholder = t.location;
-      document.querySelector('textarea').placeholder = t.desc;
-      document.querySelector('.submit-btn').textContent = t.submit;
-      document.querySelector('a').textContent = t.back;
+      document.getElementById('heroMessage').textContent = t.hero;
+      document.getElementById('subtitle').textContent = t.subtitle;
+      document.getElementById('item_name').placeholder = t.item;
+      document.getElementById('location').placeholder = t.location;
+      document.getElementById('description').placeholder = t.desc;
+      document.getElementById('submitBtn').textContent = t.submit;
+      document.getElementById('backLink').textContent = t.back;
       localStorage.setItem('lang', lang);
     }
 
@@ -249,8 +240,9 @@
     document.getElementById('langSelect').value = lang;
     document.getElementById('langSelect').addEventListener('change', e => applyLang(e.target.value));
 
+    // SUPABASE INTEGRATION
     import { createClient } from 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js/+esm';
-    const supabase = createClient('YOUR_SUPABASE_URL', 'YOUR_SUPABASE_ANON_KEY');
+    const supabase = createClient('https://jcbylpynjwpkxkoxkphd.supabase.co', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImpjYnlscHluandwa3hrb3hrcGhkIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTk2OTg0MzMsImV4cCI6MjA3NTI3NDQzM30.inEep6kgr2sysdTg3SoVtwHiEr_u7nmAWQ1_BwGHJDE');
 
     document.getElementById('foundForm').addEventListener('submit', async (e) => {
       e.preventDefault();
@@ -260,7 +252,12 @@
         location: document.getElementById('location').value,
         description: document.getElementById('description').value
       }]);
-      alert(error ? '❌ ' + error.message : '✅ Thank you! You just made someone’s day.');
+      if (error) {
+        alert('❌ ' + error.message);
+      } else {
+        alert('✅ Thank you! You just made someone’s day.');
+        document.getElementById('foundForm').reset();
+      }
     });
   </script>
 </body>
