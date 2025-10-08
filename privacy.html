@@ -3,68 +3,100 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title data-i18n="privacyTitle">Privacy Policy</title>
+  <title>Privacy Policy - YearnaZ</title>
+  <link href="https://fonts.googleapis.com/css2?family=ClashGrotesk:wght@400;600;700&display=swap" rel="stylesheet">
   <style>
     :root {
-      --bg: #f8fafc;
-      --text: #0f172a;
-      --card-bg: #ffffff;
-      --primary: #6e8efb;
+      --bg: #fdfcff;
+      --text: #1a1a2e;
+      --card-bg: white;
+      --primary: #4facfe;
       --accent: #ff6b6b;
-      --shadow: 0 4px 12px rgba(0,0,0,0.05);
+      --border: #f0f4ff;
     }
     [data-theme="dark"] {
-      --bg: #0f172a;
-      --text: #f8fafc;
-      --card-bg: #1e293b;
+      --bg: #0d0d1a;
+      --text: #f0f4ff;
+      --card-bg: #161625;
+      --border: #25253a;
     }
-
     * { margin: 0; padding: 0; box-sizing: border-box; }
     body {
-      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      font-family: 'ClashGrotesk', -apple-system, sans-serif;
       background: var(--bg);
       color: var(--text);
       line-height: 1.6;
-      transition: background 0.3s, color 0.3s;
+      transition: background 0.3s;
     }
     .container { width: 90%; max-width: 800px; margin: 0 auto; padding: 20px; }
-
-    /* Nav */
     nav {
       display: flex;
       justify-content: space-between;
       align-items: center;
       padding: 16px 0;
-      border-bottom: 1px solid rgba(0,0,0,0.1);
+      border-bottom: 1px solid var(--border);
     }
-    .logo { font-size: 1.4rem; font-weight: 700; }
+    .logo { 
+      font-size: 1.6rem; 
+      font-weight: 700; 
+      background: linear-gradient(135deg, var(--primary), var(--accent));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
     .controls { display: flex; gap: 12px; }
     select, button {
-      padding: 6px 12px;
-      border-radius: 6px;
-      border: 1px solid rgba(0,0,0,0.1);
+      padding: 8px 14px;
+      border-radius: 12px;
+      border: 2px solid var(--border);
       background: var(--card-bg);
       color: var(--text);
+      font-weight: 600;
       cursor: pointer;
     }
-
-    /* Content */
     .content-box {
       background: var(--card-bg);
-      padding: 30px;
-      border-radius: 16px;
-      box-shadow: var(--shadow);
+      padding: 36px;
+      border-radius: 24px;
       margin: 40px auto;
       max-width: 600px;
       text-align: left;
+      box-shadow: 0 10px 30px rgba(79, 172, 254, 0.15);
     }
-    h1 { text-align: center; margin-bottom: 20px; }
-    p { margin: 12px 0; line-height: 1.6; }
+    h1 {
+      text-align: center;
+      font-size: 2rem;
+      font-weight: 800;
+      margin-bottom: 20px;
+    }
+    p {
+      margin: 12px 0;
+      line-height: 1.6;
+    }
+    strong {
+      font-weight: 700;
+    }
     a {
       display: inline-block;
-      margin-top: 20px;
+      margin-top: 24px;
       color: var(--primary);
       text-decoration: none;
+      font-weight: 600;
+    }
+    footer {
+      text-align: center;
+      padding: 30px 0;
+      opacity: 0.8;
+      font-size: 0.9rem;
+      border-top: 1px solid var(--border);
+      margin-top: 40px;
+    }
+    footer a {
+      color: var(--primary);
+      text-decoration: none;
+      margin: 0 10px;
     }
   </style>
 </head>
@@ -93,33 +125,42 @@
 
     <main>
       <div class="content-box">
-        <h1 data-i18n="privacyTitle">Privacy Policy</h1>
-        <p data-i18n="lastUpdated"><strong>Last updated:</strong> October 2025</p>
-
-        <p data-i18n="whatWeCollect"><strong data-i18n="whatWeCollectHeading">What We Collect</strong><br>
-        When you submit a report, we collect: item description, location (text), and approximate city (from geolocation, if permitted).</p>
-
-        <p data-i18n="noPersonalData">We do <strong data-i18n="not">not</strong> collect your name, email, or IP address unless you contact us directly.</p>
-
-        <p data-i18n="howWeUseIt"><strong data-i18n="howWeUseItHeading">How We Use It</strong><br>
-        Data is used solely to match lost and found items within your local community.</p>
-
-        <p data-i18n="thirdParties"><strong data-i18n="thirdPartiesHeading">Third Parties</strong><br>
-        We use OpenStreetMap for reverse geocoding and Crisp for optional chat support. Both are GDPR-compliant.</p>
-
-        <p data-i18n="yourRights"><strong data-i18n="yourRightsHeading">Your Rights</strong><br>
-        You may request deletion of your report by contacting us via the chat widget.</p>
-
-        <a href="index.html" data-i18n="backHome">← Back to Home</a>
+        <h1 id="title">Privacy Policy</h1>
+        <p id="updated"><strong>Last updated:</strong> October 2025</p>
+        <p><strong id="collectHeading">What We Collect</strong><br>
+        <span id="collectText">When you submit a report, we collect: item description, location (text), and approximate city (from geolocation, if permitted).</span></p>
+        <p id="noPersonal">We do <strong id="notWord">not</strong> collect your name, email, or IP address unless you contact us directly.</p>
+        <p><strong id="useHeading">How We Use It</strong><br>
+        <span id="useText">Data is used solely to match lost and found items within your local community.</span></p>
+        <p><strong id="thirdHeading">Third Parties</strong><br>
+        <span id="thirdText">We use OpenStreetMap for reverse geocoding and Crisp for optional chat support. Both are GDPR-compliant.</span></p>
+        <p><strong id="rightsHeading">Your Rights</strong><br>
+        <span id="rightsText">You may request deletion of your report by contacting us via the chat widget.</span></p>
+        <a href="index.html" id="backLink">← Back to Home</a>
       </div>
     </main>
+
+    <footer>
+      <p>© 2025 YearnaZ. Kindness, powered by community.</p>
+      <p>
+        <a href="about.html">About</a> • 
+        <a href="privacy.html">Privacy</a> • 
+        <a href="contact.html">Contact</a> • 
+        <a href="hero-wall.html">Hero Wall</a>
+      </p>
+    </footer>
   </div>
 
   <!-- CRISP CHAT -->
-  <script type="text/javascript">window.$crisp=[];window.CRISP_WEBSITE_ID="8b1ac106-f164-4b83-a0c6-e9e36a267cf5";(function(){d=document;s=d.createElement("script");s.src="https://client.crisp.chat/l.js";s.async=1;d.getElementsByTagName("head")[0].appendChild(s);})();</script>
+  <script type="text/javascript">
+    window.$crisp = []; window.CRISP_WEBSITE_ID = "YOUR_CRISP_ID";
+    (function() { d = document; s = d.createElement("script");
+    s.src = "https://client.crisp.chat/l.js"; s.async = 1;
+    d.getElementsByTagName("head")[0].appendChild(s); })();
+  </script>
 
-  <script type="module">
-    // ===== THEME =====
+  <script>
+    // Theme Toggle
     const themeBtn = document.getElementById('themeBtn');
     const isDark = localStorage.getItem('theme') === 'dark';
     if (isDark) {
@@ -139,204 +180,213 @@
       }
     });
 
-    // ===== LANGUAGE =====
+    // Multilingual Support
     const translations = {
       en: { 
-        privacyTitle: "Privacy Policy",
-        lastUpdated: "Last updated: October 2025",
-        whatWeCollectHeading: "What We Collect",
-        whatWeCollect: "When you submit a report, we collect: item description, location (text), and approximate city (from geolocation, if permitted).",
-        not: "not",
-        noPersonalData: "We do not collect your name, email, or IP address unless you contact us directly.",
-        howWeUseItHeading: "How We Use It",
-        howWeUseIt: "Data is used solely to match lost and found items within your local community.",
-        thirdPartiesHeading: "Third Parties",
-        thirdParties: "We use OpenStreetMap for reverse geocoding and Crisp for optional chat support. Both are GDPR-compliant.",
-        yourRightsHeading: "Your Rights",
-        yourRights: "You may request deletion of your report by contacting us via the chat widget.",
-        backHome: "← Back to Home"
+        title: "Privacy Policy",
+        updated: "Last updated: October 2025",
+        collectHeading: "What We Collect",
+        collectText: "When you submit a report, we collect: item description, location (text), and approximate city (from geolocation, if permitted).",
+        notWord: "not",
+        noPersonal: "We do not collect your name, email, or IP address unless you contact us directly.",
+        useHeading: "How We Use It",
+        useText: "Data is used solely to match lost and found items within your local community.",
+        thirdHeading: "Third Parties",
+        thirdText: "We use OpenStreetMap for reverse geocoding and Crisp for optional chat support. Both are GDPR-compliant.",
+        rightsHeading: "Your Rights",
+        rightsText: "You may request deletion of your report by contacting us via the chat widget.",
+        back: "← Back to Home"
       },
       es: { 
-        privacyTitle: "Política de Privacidad",
-        lastUpdated: "Última actualización: octubre de 2025",
-        whatWeCollectHeading: "Qué recopilamos",
-        whatWeCollect: "Cuando envía un informe, recopilamos: descripción del artículo, ubicación (texto) y ciudad aproximada (de la geolocalización, si se permite).",
-        not: "no",
-        noPersonalData: "No recopilamos su nombre, correo electrónico o dirección IP a menos que nos contacte directamente.",
-        howWeUseItHeading: "Cómo usamos la información",
-        howWeUseIt: "Los datos se utilizan únicamente para coincidir artículos perdidos y encontrados dentro de su comunidad local.",
-        thirdPartiesHeading: "Terceros",
-        thirdParties: "Usamos OpenStreetMap para la geocodificación inversa y Crisp para el soporte de chat opcional. Ambos cumplen con el RGPD.",
-        yourRightsHeading: "Sus derechos",
-        yourRights: "Puede solicitar la eliminación de su informe comunicándose con nosotros a través del widget de chat.",
-        backHome: "← Volver al Inicio"
+        title: "Política de Privacidad",
+        updated: "Última actualización: octubre de 2025",
+        collectHeading: "Qué recopilamos",
+        collectText: "Cuando envía un informe, recopilamos: descripción del artículo, ubicación (texto) y ciudad aproximada (de la geolocalización, si se permite).",
+        notWord: "no",
+        noPersonal: "No recopilamos su nombre, correo electrónico o dirección IP a menos que nos contacte directamente.",
+        useHeading: "Cómo usamos la información",
+        useText: "Los datos se utilizan únicamente para coincidir artículos perdidos y encontrados dentro de su comunidad local.",
+        thirdHeading: "Terceros",
+        thirdText: "Usamos OpenStreetMap para la geocodificación inversa y Crisp para el soporte de chat opcional. Ambos cumplen con el RGPD.",
+        rightsHeading: "Sus derechos",
+        rightsText: "Puede solicitar la eliminación de su informe comunicándose con nosotros a través del widget de chat.",
+        back: "← Volver al Inicio"
       },
       fr: { 
-        privacyTitle: "Politique de confidentialité",
-        lastUpdated: "Dernière mise à jour : octobre 2025",
-        whatWeCollectHeading: "Ce que nous collectons",
-        whatWeCollect: "Lorsque vous soumettez un rapport, nous collectons : description de l'article, emplacement (texte) et ville approximative (à partir de la géolocalisation, si autorisée).",
-        not: "ne",
-        noPersonalData: "Nous ne collectons pas votre nom, votre e-mail ou votre adresse IP sauf si vous nous contactez directement.",
-        howWeUseItHeading: "Comment nous utilisons les données",
-        howWeUseIt: "Les données sont utilisées uniquement pour faire correspondre les articles perdus et trouvés au sein de votre communauté locale.",
-        thirdPartiesHeading: "Tiers",
-        thirdParties: "Nous utilisons OpenStreetMap pour le géocodage inverse et Crisp pour le support de chat optionnel. Les deux sont conformes au RGPD.",
-        yourRightsHeading: "Vos droits",
-        yourRights: "Vous pouvez demander la suppression de votre rapport en nous contactant via le widget de chat.",
-        backHome: "← Retour à l'accueil"
+        title: "Politique de confidentialité",
+        updated: "Dernière mise à jour : octobre 2025",
+        collectHeading: "Ce que nous collectons",
+        collectText: "Lorsque vous soumettez un rapport, nous collectons : description de l'article, emplacement (texte) et ville approximative (à partir de la géolocalisation, si autorisée).",
+        notWord: "ne",
+        noPersonal: "Nous ne collectons pas votre nom, votre e-mail ou votre adresse IP sauf si vous nous contactez directement.",
+        useHeading: "Comment nous utilisons les données",
+        useText: "Les données sont utilisées uniquement pour faire correspondre les articles perdus et trouvés au sein de votre communauté locale.",
+        thirdHeading: "Tiers",
+        thirdText: "Nous utilisons OpenStreetMap pour le géocodage inverse et Crisp pour le support de chat optionnel. Les deux sont conformes au RGPD.",
+        rightsHeading: "Vos droits",
+        rightsText: "Vous pouvez demander la suppression de votre rapport en nous contactant via le widget de chat.",
+        back: "← Retour à l'accueil"
       },
       de: { 
-        privacyTitle: "Datenschutzrichtlinie",
-        lastUpdated: "Zuletzt aktualisiert: Oktober 2025",
-        whatWeCollectHeading: "Was wir sammeln",
-        whatWeCollect: "Wenn Sie einen Bericht einreichen, sammeln wir: Artikelbeschreibung, Standort (Text) und ungefähre Stadt (aus der Geolokalisierung, falls erlaubt).",
-        not: "nicht",
-        noPersonalData: "Wir erfassen Ihren Namen, Ihre E-Mail-Adresse oder Ihre IP-Adresse nicht, es sei denn, Sie kontaktieren uns direkt.",
-        howWeUseItHeading: "Wie wir die Daten verwenden",
-        howWeUseIt: "Daten werden ausschließlich verwendet, um verlorene und gefundene Gegenstände innerhalb Ihrer lokalen Gemeinschaft abzugleichen.",
-        thirdPartiesHeading: "Dritte",
-        thirdParties: "Wir verwenden OpenStreetMap für die umgekehrte Geocodierung und Crisp für optionalen Chat-Support. Beide sind DSGVO-konform.",
-        yourRightsHeading: "Ihre Rechte",
-        yourRights: "Sie können die Löschung Ihres Berichts beantragen, indem Sie uns über das Chat-Widget kontaktieren.",
-        backHome: "← Zurück zur Startseite"
+        title: "Datenschutzrichtlinie",
+        updated: "Zuletzt aktualisiert: Oktober 2025",
+        collectHeading: "Was wir sammeln",
+        collectText: "Wenn Sie einen Bericht einreichen, sammeln wir: Artikelbeschreibung, Standort (Text) und ungefähre Stadt (aus der Geolokalisierung, falls erlaubt).",
+        notWord: "nicht",
+        noPersonal: "Wir erfassen Ihren Namen, Ihre E-Mail-Adresse oder Ihre IP-Adresse nicht, es sei denn, Sie kontaktieren uns direkt.",
+        useHeading: "Wie wir die Daten verwenden",
+        useText: "Daten werden ausschließlich verwendet, um verlorene und gefundene Gegenstände innerhalb Ihrer lokalen Gemeinschaft abzugleichen.",
+        thirdHeading: "Dritte",
+        thirdText: "Wir verwenden OpenStreetMap für die umgekehrte Geocodierung und Crisp für optionalen Chat-Support. Beide sind DSGVO-konform.",
+        rightsHeading: "Ihre Rechte",
+        rightsText: "Sie können die Löschung Ihres Berichts beantragen, indem Sie uns über das Chat-Widget kontaktieren.",
+        back: "← Zurück zur Startseite"
       },
       pt: { 
-        privacyTitle: "Política de Privacidade",
-        lastUpdated: "Última atualização: outubro de 2025",
-        whatWeCollectHeading: "O que coletamos",
-        whatWeCollect: "Quando você envia um relatório, coletamos: descrição do item, localização (texto) e cidade aproximada (da geolocalização, se permitida).",
-        not: "não",
-        noPersonalData: "Não coletamos seu nome, e-mail ou endereço IP a menos que você nos contate diretamente.",
-        howWeUseItHeading: "Como usamos",
-        howWeUseIt: "Os dados são usados exclusivamente para combinar itens perdidos e encontrados dentro da sua comunidade local.",
-        thirdPartiesHeading: "Terceiros",
-        thirdParties: "Usamos OpenStreetMap para geocodificação reversa e Crisp para suporte de chat opcional. Ambos são compatíveis com o GDPR.",
-        yourRightsHeading: "Seus direitos",
-        yourRights: "Você pode solicitar a exclusão do seu relatório entrando em contato conosco pelo widget de chat.",
-        backHome: "← Voltar para Início"
+        title: "Política de Privacidade",
+        updated: "Última atualização: outubro de 2025",
+        collectHeading: "O que coletamos",
+        collectText: "Quando você envia um relatório, coletamos: descrição do item, localização (texto) e cidade aproximada (da geolocalização, se permitida).",
+        notWord: "não",
+        noPersonal: "Não coletamos seu nome, e-mail ou endereço IP a menos que você nos contate diretamente.",
+        useHeading: "Como usamos",
+        useText: "Os dados são usados exclusivamente para combinar itens perdidos e encontrados dentro da sua comunidade local.",
+        thirdHeading: "Terceiros",
+        thirdText: "Usamos OpenStreetMap para geocodificação reversa e Crisp para suporte de chat opcional. Ambos são compatíveis com o GDPR.",
+        rightsHeading: "Seus direitos",
+        rightsText: "Você pode solicitar a exclusão do seu relatório entrando em contato conosco pelo widget de chat.",
+        back: "← Voltar para Início"
       },
       it: { 
-        privacyTitle: "Informativa sulla Privacy",
-        lastUpdated: "Ultimo aggiornamento: ottobre 2025",
-        whatWeCollectHeading: "Cosa raccogliamo",
-        whatWeCollect: "Quando invii un rapporto, raccogliamo: descrizione dell'oggetto, luogo (testo) e città approssimativa (dalla geolocalizzazione, se consentita).",
-        not: "non",
-        noPersonalData: "Non raccogliamo il tuo nome, email o indirizzo IP a meno che non ci contatti direttamente.",
-        howWeUseItHeading: "Come usiamo i dati",
-        howWeUseIt: "I dati sono utilizzati esclusivamente per abbinare oggetti persi e ritrovati nella tua comunità locale.",
-        thirdPartiesHeading: "Terze parti",
-        thirdParties: "Utilizziamo OpenStreetMap per la geocodifica inversa e Crisp per il supporto chat opzionale. Entrambi sono conformi al GDPR.",
-        yourRightsHeading: "I tuoi diritti",
-        yourRights: "Puoi richiedere l'eliminazione del tuo rapporto contattandoci tramite il widget di chat.",
-        backHome: "← Torna alla Home"
+        title: "Informativa sulla Privacy",
+        updated: "Ultimo aggiornamento: ottobre 2025",
+        collectHeading: "Cosa raccogliamo",
+        collectText: "Quando invii un rapporto, raccogliamo: descrizione dell'oggetto, luogo (testo) e città approssimativa (dalla geolocalizzazione, se consentita).",
+        notWord: "non",
+        noPersonal: "Non raccogliamo il tuo nome, email o indirizzo IP a meno che non ci contatti direttamente.",
+        useHeading: "Come usiamo i dati",
+        useText: "I dati sono utilizzati esclusivamente per abbinare oggetti persi e ritrovati nella tua comunità locale.",
+        thirdHeading: "Terze parti",
+        thirdText: "Utilizziamo OpenStreetMap per la geocodifica inversa e Crisp per il supporto chat opzionale. Entrambi sono conformi al GDPR.",
+        rightsHeading: "I tuoi diritti",
+        rightsText: "Puoi richiedere l'eliminazione del tuo rapporto contattandoci tramite il widget di chat.",
+        back: "← Torna alla Home"
       },
       nl: { 
-        privacyTitle: "Privacybeleid",
-        lastUpdated: "Laatst bijgewerkt: oktober 2025",
-        whatWeCollectHeading: "Wat we verzamelen",
-        whatWeCollect: "Wanneer u een rapport indient, verzamelen we: artikelbeschrijving, locatie (tekst) en benaderende stad (van geolocatie, indien toegestaan).",
-        not: "niet",
-        noPersonalData: "We verzamelen uw naam, e-mail of IP-adres niet, tenzij u ons direct contacteert.",
-        howWeUseItHeading: "Hoe we het gebruiken",
-        howWeUseIt: "Gegevens worden uitsluitend gebruikt om verloren en gevonden items binnen uw lokale gemeenschap te koppelen.",
-        thirdPartiesHeading: "Derden",
-        thirdParties: "We gebruiken OpenStreetMap voor reverse geocoding en Crisp voor optionele chatondersteuning. Beide zijn GDPR-compliant.",
-        yourRightsHeading: "Uw rechten",
-        yourRights: "U kunt verwijdering van uw rapport aanvragen door ons te contacteren via het chatwidget.",
-        backHome: "← Terug naar home"
+        title: "Privacybeleid",
+        updated: "Laatst bijgewerkt: oktober 2025",
+        collectHeading: "Wat we verzamelen",
+        collectText: "Wanneer u een rapport indient, verzamelen we: artikelbeschrijving, locatie (tekst) en benaderende stad (van geolocatie, indien toegestaan).",
+        notWord: "niet",
+        noPersonal: "We verzamelen uw naam, e-mail of IP-adres niet, tenzij u ons direct contacteert.",
+        useHeading: "Hoe we het gebruiken",
+        useText: "Gegevens worden uitsluitend gebruikt om verloren en gevonden items binnen uw lokale gemeenschap te koppelen.",
+        thirdHeading: "Derden",
+        thirdText: "We gebruiken OpenStreetMap voor reverse geocoding en Crisp voor optionele chatondersteuning. Beide zijn GDPR-compliant.",
+        rightsHeading: "Uw rechten",
+        rightsText: "U kunt verwijdering van uw rapport aanvragen door ons te contacteren via het chatwidget.",
+        back: "← Terug naar home"
       },
       ru: { 
-        privacyTitle: "Политика конфиденциальности",
-        lastUpdated: "Последнее обновление: октябрь 2025",
-        whatWeCollectHeading: "Что мы собираем",
-        whatWeCollect: "Когда вы отправляете отчет, мы собираем: описание предмета, местоположение (текст) и приблизительный город (из геолокации, если разрешено).",
-        not: "не",
-        noPersonalData: "Мы не собираем ваше имя, электронную почту или IP-адрес, если вы не свяжетесь с нами напрямую.",
-        howWeUseItHeading: "Как мы используем информацию",
-        howWeUseIt: "Данные используются исключительно для сопоставления потерянных и найденных предметов в вашем местном сообществе.",
-        thirdPartiesHeading: "Третьи стороны",
-        thirdParties: "Мы используем OpenStreetMap для обратного геокодирования и Crisp для опциональной поддержки чата. Оба соответствуют GDPR.",
-        yourRightsHeading: "Ваши права",
-        yourRights: "Вы можете запросить удаление вашего отчета, связавшись с нами через виджет чата.",
-        backHome: "← Вернуться на главную"
+        title: "Политика конфиденциальности",
+        updated: "Последнее обновление: октябрь 2025",
+        collectHeading: "Что мы собираем",
+        collectText: "Когда вы отправляете отчет, мы собираем: описание предмета, местоположение (текст) и приблизительный город (из геолокации, если разрешено).",
+        notWord: "не",
+        noPersonal: "Мы не собираем ваше имя, электронную почту или IP-адрес, если вы не свяжетесь с нами напрямую.",
+        useHeading: "Как мы используем информацию",
+        useText: "Данные используются исключительно для сопоставления потерянных и найденных предметов в вашем местном сообществе.",
+        thirdHeading: "Третьи стороны",
+        thirdText: "Мы используем OpenStreetMap для обратного геокодирования и Crisp для опциональной поддержки чата. Оба соответствуют GDPR.",
+        rightsHeading: "Ваши права",
+        rightsText: "Вы можете запросить удаление вашего отчета, связавшись с нами через виджет чата.",
+        back: "← Вернуться на главную"
       },
       ja: { 
-        privacyTitle: "プライバシーポリシー",
-        lastUpdated: "最終更新日：2025年10月",
-        whatWeCollectHeading: "収集する情報",
-        whatWeCollect: "レポートを提出すると、以下の情報を収集します：アイテムの説明、場所（テキスト）、および概略の都市（許可されている場合、ジオロケーションから）。",
-        not: "しません",
-        noPersonalData: "直接ご連絡いただかない限り、お客様の氏名、メールアドレス、IPアドレスは収集しません。",
-        howWeUseItHeading: "データの利用方法",
-        howWeUseIt: "データは、地域コミュニティ内で紛失・発見品を照合するためにのみ使用されます。",
-        thirdPartiesHeading: "サードパーティ",
-        thirdParties: "逆ジオコーディングにはOpenStreetMap、オプションのチャットサポートにはCrispを使用しています。どちらもGDPR準拠です。",
-        yourRightsHeading: "あなたの権利",
-        yourRights: "チャットウィジェットを通じて当社に連絡することで、レポートの削除をリクエストできます。",
-        backHome: "← ホームに戻る"
+        title: "プライバシーポリシー",
+        updated: "最終更新日：2025年10月",
+        collectHeading: "収集する情報",
+        collectText: "レポートを提出すると、以下の情報を収集します：アイテムの説明、場所（テキスト）、および概略の都市（許可されている場合、ジオロケーションから）。",
+        notWord: "しません",
+        noPersonal: "直接ご連絡いただかない限り、お客様の氏名、メールアドレス、IPアドレスは収集しません。",
+        useHeading: "データの利用方法",
+        useText: "データは、地域コミュニティ内で紛失・発見品を照合するためにのみ使用されます。",
+        thirdHeading: "サードパーティ",
+        thirdText: "逆ジオコーディングにはOpenStreetMap、オプションのチャットサポートにはCrispを使用しています。どちらもGDPR準拠です。",
+        rightsHeading: "あなたの権利",
+        rightsText: "チャットウィジェットを通じて当社に連絡することで、レポートの削除をリクエストできます。",
+        back: "← ホームに戻る"
       },
       ko: { 
-        privacyTitle: "개인정보 처리방침",
-        lastUpdated: "최종 업데이트: 2025년 10월",
-        whatWeCollectHeading: "수집하는 정보",
-        whatWeCollect: "보고서를 제출할 때, 다음 정보를 수집합니다: 아이템 설명, 위치(텍스트), 그리고 대략적인 도시(허용된 경우 지오로케이션에서).",
-        not: "하지 않습니다",
-        noPersonalData: "직접 연락하지 않는 한, 귀하의 이름, 이메일 또는 IP 주소는 수집하지 않습니다.",
-        howWeUseItHeading: "데이터 사용 방법",
-        howWeUseIt: "데이터는 지역 커뮤니티 내에서 분실 및 발견된 아이템을 매칭하기 위해만 사용됩니다.",
-        thirdPartiesHeading: "제3자",
-        thirdParties: "역지오코딩에는 OpenStreetMap, 선택적 채팅 지원에는 Crisp를 사용합니다. 모두 GDPR 준수입니다.",
-        yourRightsHeading: "귀하의 권리",
-        yourRights: "채팅 위젯을 통해 당사에 문의하여 보고서 삭제를 요청할 수 있습니다.",
-        backHome: "← 홈으로 돌아가기"
+        title: "개인정보 처리방침",
+        updated: "최종 업데이트: 2025년 10월",
+        collectHeading: "수집하는 정보",
+        collectText: "보고서를 제출할 때, 다음 정보를 수집합니다: 아이템 설명, 위치(텍스트), 그리고 대략적인 도시(허용된 경우 지오로케이션에서).",
+        notWord: "하지 않습니다",
+        noPersonal: "직접 연락하지 않는 한, 귀하의 이름, 이메일 또는 IP 주소는 수집하지 않습니다.",
+        useHeading: "데이터 사용 방법",
+        useText: "데이터는 지역 커뮤니티 내에서 분실 및 발견된 아이템을 매칭하기 위해만 사용됩니다.",
+        thirdHeading: "제3자",
+        thirdText: "역지오코딩에는 OpenStreetMap, 선택적 채팅 지원에는 Crisp를 사용합니다. 모두 GDPR 준수입니다.",
+        rightsHeading: "귀하의 권리",
+        rightsText: "채팅 위젯을 통해 당사에 문의하여 보고서 삭제를 요청할 수 있습니다.",
+        back: "← 홈으로 돌아가기"
       },
       zh: { 
-        privacyTitle: "隐私政策",
-        lastUpdated: "最后更新：2025年10月",
-        whatWeCollectHeading: "我们收集的信息",
-        whatWeCollect: "当您提交报告时，我们收集：物品描述、位置（文本）和大致城市（来自地理定位，如允许）。",
-        not: "不",
-        noPersonalData: "除非您直接联系我们，否则我们不会收集您的姓名、电子邮件或IP地址。",
-        howWeUseItHeading: "我们如何使用信息",
-        howWeUseIt: "数据仅用于在您的本地社区内匹配丢失和找到的物品。",
-        thirdPartiesHeading: "第三方",
-        thirdParties: "我们使用OpenStreetMap进行反向地理编码，使用Crisp提供可选聊天支持。两者均符合GDPR。",
-        yourRightsHeading: "您的权利",
-        yourRights: "您可以通过聊天小部件联系我们，请求删除您的报告。",
-        backHome: "← 返回首页"
+        title: "隐私政策",
+        updated: "最后更新：2025年10月",
+        collectHeading: "我们收集的信息",
+        collectText: "当您提交报告时，我们收集：物品描述、位置（文本）和大致城市（来自地理定位，如允许）。",
+        notWord: "不",
+        noPersonal: "除非您直接联系我们，否则我们不会收集您的姓名、电子邮件或IP地址。",
+        useHeading: "我们如何使用信息",
+        useText: "数据仅用于在您的本地社区内匹配丢失和找到的物品。",
+        thirdHeading: "第三方",
+        thirdText: "我们使用OpenStreetMap进行反向地理编码，使用Crisp提供可选聊天支持。两者均符合GDPR。",
+        rightsHeading: "您的权利",
+        rightsText: "您可以通过聊天小部件联系我们，请求删除您的报告。",
+        back: "← 返回首页"
       },
       ar: { 
-        privacyTitle: "سياسة الخصوصية",
-        lastUpdated: "آخر تحديث: أكتوبر 2025",
-        whatWeCollectHeading: "ما نجمعه",
-        whatWeCollect: "عندما ترسل تقريرًا، نجمع: وصف العنصر، الموقع (نص)، والمدينة التقريبية (من الجيولوكاشن، إذا سُمح بذلك).",
-        not: "لا",
-        noPersonalData: "لا نجمع اسمك أو بريدك الإلكتروني أو عنوان IP إلا إذا تواصلت معنا مباشرةً.",
-        howWeUseItHeading: "كيف نستخدمها",
-        howWeUseIt: "تُستخدم البيانات فقط لربط العناصر المفقودة والمكتشفة داخل مجتمعك المحلي.",
-        thirdPartiesHeading: "أطراف ثالثة",
-        thirdParties: "نستخدم OpenStreetMap للترجمة الجغرافية العكسية وCrisp لدعم الدردشة الاختياري. كلاهما متوافقان مع GDPR.",
-        yourRightsHeading: "حقوقك",
-        yourRights: "يمكنك طلب حذف تقريرك بالاتصال بنا عبر ويدجيت الدردشة.",
-        backHome: "← العودة إلى الصفحة الرئيسية"
+        title: "سياسة الخصوصية",
+        updated: "آخر تحديث: أكتوبر 2025",
+        collectHeading: "ما نجمعه",
+        collectText: "عندما ترسل تقريرًا، نجمع: وصف العنصر، الموقع (نص)، والمدينة التقريبية (من الجيولوكاشن، إذا سُمح بذلك).",
+        notWord: "لا",
+        noPersonal: "لا نجمع اسمك أو بريدك الإلكتروني أو عنوان IP إلا إذا تواصلت معنا مباشرةً.",
+        useHeading: "كيف نستخدمها",
+        useText: "تُستخدم البيانات فقط لربط العناصر المفقودة والمكتشفة داخل مجتمعك المحلي.",
+        thirdHeading: "أطراف ثالثة",
+        thirdText: "نستخدم OpenStreetMap للترجمة الجغرافية العكسية وCrisp لدعم الدردشة الاختياري. كلاهما متوافقان مع GDPR.",
+        rightsHeading: "حقوقك",
+        rightsText: "يمكنك طلب حذف تقريرك بالاتصال بنا عبر ويدجيت الدردشة.",
+        back: "← العودة إلى الصفحة الرئيسية"
       }
     };
 
-    function applyLanguage(lang) {
+    function applyLang(lang) {
       const t = translations[lang] || translations.en;
-      document.querySelectorAll('[data-i18n]').forEach(el => {
-        const key = el.getAttribute('data-i18n');
-        if (t[key]) el.textContent = t[key];
-      });
+      document.getElementById('title').textContent = t.title;
+      document.getElementById('updated').innerHTML = `<strong>${t.updated}</strong>`;
+      document.getElementById('collectHeading').textContent = t.collectHeading;
+      document.getElementById('collectText').textContent = t.collectText;
+      document.getElementById('notWord').textContent = t.notWord;
+      document.getElementById('noPersonal').textContent = t.noPersonal;
+      document.getElementById('useHeading').textContent = t.useHeading;
+      document.getElementById('useText').textContent = t.useText;
+      document.getElementById('thirdHeading').textContent = t.thirdHeading;
+      document.getElementById('thirdText').textContent = t.thirdText;
+      document.getElementById('rightsHeading').textContent = t.rightsHeading;
+      document.getElementById('rightsText').textContent = t.rightsText;
+      document.getElementById('backLink').textContent = t.back;
       localStorage.setItem('lang', lang);
     }
 
     const savedLang = localStorage.getItem('lang') || navigator.language.split('-')[0] || 'en';
     const lang = translations[savedLang] ? savedLang : 'en';
-    applyLanguage(lang);
+    applyLang(lang);
     document.getElementById('langSelect').value = lang;
-    document.getElementById('langSelect').addEventListener('change', e => applyLanguage(e.target.value));
+    document.getElementById('langSelect').addEventListener('change', e => applyLang(e.target.value));
   </script>
 </body>
 </html>
