@@ -1,149 +1,238 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" id="htmlTag">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>About - YearnaZ</title>
+  <title data-i18n="aboutTitle">About YearnaZ</title>
   <style>
-    body { font-family: sans-serif; background: linear-gradient(135deg, #a777e3, #6e8efb); color: white; padding: 20px; }
-    .container { max-width: 600px; margin: auto; background: rgba(255,255,255,0.1); padding: 40px; border-radius: 20px; backdrop-filter: blur(10px); text-align: center; }
-    a { display: inline-block; margin-top: 30px; color: rgba(255,255,255,0.9); text-decoration: none; }
+    :root {
+      --bg: #f8fafc;
+      --text: #0f172a;
+      --card-bg: #ffffff;
+      --primary: #6e8efb;
+      --accent: #ff6b6b;
+      --shadow: 0 4px 12px rgba(0,0,0,0.05);
+    }
+    [data-theme="dark"] {
+      --bg: #0f172a;
+      --text: #f8fafc;
+      --card-bg: #1e293b;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+      transition: background 0.3s, color 0.3s;
+    }
+    .container { width: 90%; max-width: 800px; margin: 0 auto; padding: 20px; }
+
+    /* Nav */
+    nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 16px 0;
+      border-bottom: 1px solid rgba(0,0,0,0.1);
+    }
+    .logo { font-size: 1.4rem; font-weight: 700; }
+    .controls { display: flex; gap: 12px; }
+    select, button {
+      padding: 6px 12px;
+      border-radius: 6px;
+      border: 1px solid rgba(0,0,0,0.1);
+      background: var(--card-bg);
+      color: var(--text);
+      cursor: pointer;
+    }
+
+    /* Content */
+    .content-box {
+      background: var(--card-bg);
+      padding: 30px;
+      border-radius: 16px;
+      box-shadow: var(--shadow);
+      margin: 40px auto;
+      max-width: 600px;
+      text-align: center;
+    }
+    h1 { margin-bottom: 20px; }
+    p { margin: 12px 0; line-height: 1.6; opacity: 0.9; }
+    a {
+      display: inline-block;
+      margin-top: 20px;
+      color: var(--primary);
+      text-decoration: none;
+    }
   </style>
 </head>
-  <script>
-  // 12-Language Support (Lightweight)
-  const translations = {
-    en: { 
-      reportTitle: "Report a Lost Item", 
-      subtitle: "We’ll help you find it. Fill out the details below.",
-      itemLabel: "Item name",
-      locationLabel: "Location",
-      descLabel: "Description",
-      submitBtn: "Submit Report",
-      backHome: "← Back to Home"
-    },
-    es: { 
-      reportTitle: "Reportar un Artículo Perdido", 
-      subtitle: "Te ayudaremos a encontrarlo. Completa los detalles a continuación.",
-      itemLabel: "Nombre del artículo",
-      locationLabel: "Ubicación",
-      descLabel: "Descripción",
-      submitBtn: "Enviar Reporte",
-      backHome: "← Volver al Inicio"
-    },
-    fr: { 
-      reportTitle: "Signaler un objet perdu", 
-      subtitle: "Nous vous aiderons à le retrouver. Remplissez les détails ci-dessous.",
-      itemLabel: "Nom de l'objet",
-      locationLabel: "Emplacement",
-      descLabel: "Description",
-      submitBtn: "Soumettre le rapport",
-      backHome: "← Retour à l'accueil"
-    },
-    de: { 
-      reportTitle: "Verlorenen Gegenstand melden", 
-      subtitle: "Wir helfen Ihnen, ihn zu finden. Füllen Sie die Details unten aus.",
-      itemLabel: "Gegenstandsname",
-      locationLabel: "Standort",
-      descLabel: "Beschreibung",
-      submitBtn: "Bericht senden",
-      backHome: "← Zurück zur Startseite"
-    },
-    pt: { 
-      reportTitle: "Relatar um Item Perdido", 
-      subtitle: "Ajudaremos você a encontrá-lo. Preencha os detalhes abaixo.",
-      itemLabel: "Nome do item",
-      locationLabel: "Localização",
-      descLabel: "Descrição",
-      submitBtn: "Enviar Relatório",
-      backHome: "← Voltar para Início"
-    },
-    it: { 
-      reportTitle: "Segnala un oggetto smarrito", 
-      subtitle: "Ti aiuteremo a trovarlo. Compila i dettagli qui sotto.",
-      itemLabel: "Nome oggetto",
-      locationLabel: "Posizione",
-      descLabel: "Descrizione",
-      submitBtn: "Invia Segnalazione",
-      backHome: "← Torna alla Home"
-    },
-    nl: { 
-      reportTitle: "Meld een verloren voorwerp", 
-      subtitle: "We helpen je het te vinden. Vul hieronder de gegevens in.",
-      itemLabel: "Naam voorwerp",
-      locationLabel: "Locatie",
-      descLabel: "Beschrijving",
-      submitBtn: "Rapport verzenden",
-      backHome: "← Terug naar home"
-    },
-    ru: { 
-      reportTitle: "Сообщить о потере вещи", 
-      subtitle: "Мы поможем вам найти её. Заполните данные ниже.",
-      itemLabel: "Название предмета",
-      locationLabel: "Местоположение",
-      descLabel: "Описание",
-      submitBtn: "Отправить отчет",
-      backHome: "← Вернуться на главную"
-    },
-    ja: { 
-      reportTitle: "紛失物を報告", 
-      subtitle: "見つけるお手伝いをします。以下の詳細を入力してください。",
-      itemLabel: "アイテム名",
-      locationLabel: "場所",
-      descLabel: "説明",
-      submitBtn: "報告を送信",
-      backHome: "← ホームに戻る"
-    },
-    ko: { 
-      reportTitle: "분실물 신고", 
-      subtitle: "찾는 것을 도와드리겠습니다. 아래에 세부 정보를 입력하세요.",
-      itemLabel: "물품 이름",
-      locationLabel: "위치",
-      descLabel: "설명",
-      submitBtn: "신고 제출",
-      backHome: "← 홈으로 돌아가기"
-    },
-    zh: { 
-      reportTitle: "报告丢失物品", 
-      subtitle: "我们将帮您找回。请填写以下详细信息。",
-      itemLabel: "物品名称",
-      locationLabel: "位置",
-      descLabel: "描述",
-      submitBtn: "提交报告",
-      backHome: "← 返回首页"
-    },
-    ar: { 
-      reportTitle: "الإبلاغ عن عنصر مفقود", 
-      subtitle: "سنساعدك في العثور عليه. املأ التفاصيل أدناه.",
-      itemLabel: "اسم العنصر",
-      locationLabel: "الموقع",
-      descLabel: "الوصف",
-      submitBtn: "إرسال التقرير",
-      backHome: "← العودة إلى الصفحة الرئيسية"
-    }
-  };
-
-  function applyLanguage(lang) {
-    const t = translations[lang] || translations.en;
-    document.querySelectorAll('[data-i18n]').forEach(el => {
-      const key = el.getAttribute('data-i18n');
-      if (t[key]) el.textContent = t[key];
-    });
-    localStorage.setItem('lang', lang);
-  }
-
-  // Auto-detect or load saved language
-  const savedLang = localStorage.getItem('lang') || navigator.language.split('-')[0] || 'en';
-  const lang = translations[savedLang] ? savedLang : 'en';
-  applyLanguage(lang);
-</script>
 <body>
   <div class="container">
-    <h1>About YearnaZ</h1>
-    <p>YearnaZ is a free, community-powered lost and found network.</p>
-    <p>We believe that everyday kindness—like returning a lost wallet or reporting a found phone—builds stronger communities.</p>
-    <p>There are no ads, no fake reports, and no data sold. Every submission is real.</p>
-    <a href="index.html">← Back to Home</a>
+    <nav>
+      <div class="logo">YearnaZ</div>
+      <div class="controls">
+        <select id="langSelect">
+          <option value="en">English</option>
+          <option value="es">Español</option>
+          <option value="fr">Français</option>
+          <option value="de">Deutsch</option>
+          <option value="pt">Português</option>
+          <option value="it">Italiano</option>
+          <option value="nl">Nederlands</option>
+          <option value="ru">Русский</option>
+          <option value="ja">日本語</option>
+          <option value="ko">한국어</option>
+          <option value="zh">中文</option>
+          <option value="ar">العربية</option>
+        </select>
+        <button id="themeBtn">🌙</button>
+      </div>
+    </nav>
+
+    <main>
+      <div class="content-box">
+        <h1 data-i18n="aboutTitle">About YearnaZ</h1>
+        <p data-i18n="mission">YearnaZ is a free, community-powered lost and found network.</p>
+        <p data-i18n="vision">We believe that everyday kindness—like returning a lost wallet or reporting a found phone—builds stronger communities.</p>
+        <p data-i18n="promise">There are no ads, no fake reports, and no data sold. Every submission is real.</p>
+        <a href="index.html" data-i18n="backHome">← Back to Home</a>
+      </div>
+    </main>
   </div>
+
+  <!-- CRISP CHAT -->
+  <script type="text/javascript">
+    window.$crisp = []; window.CRISP_WEBSITE_ID = "your-crisp-id";
+    (function() { d = document; s = d.createElement("script");
+    s.src = "https://client.crisp.chat/l.js"; s.async = 1;
+    d.getElementsByTagName("head")[0].appendChild(s); })();
+  </script>
+
+  <script type="module">
+    // ===== THEME =====
+    const themeBtn = document.getElementById('themeBtn');
+    const isDark = localStorage.getItem('theme') === 'dark';
+    if (isDark) {
+      document.documentElement.setAttribute('data-theme', 'dark');
+      themeBtn.textContent = '☀️';
+    }
+    themeBtn.addEventListener('click', () => {
+      const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
+      if (isDark) {
+        document.documentElement.removeAttribute('data-theme');
+        localStorage.setItem('theme', 'light');
+        themeBtn.textContent = '🌙';
+      } else {
+        document.documentElement.setAttribute('data-theme', 'dark');
+        localStorage.setItem('theme', 'dark');
+        themeBtn.textContent = '☀️';
+      }
+    });
+
+    // ===== LANGUAGE =====
+    const translations = {
+      en: { 
+        aboutTitle: "About YearnaZ",
+        mission: "YearnaZ is a free, community-powered lost and found network.",
+        vision: "We believe that everyday kindness—like returning a lost wallet or reporting a found phone—builds stronger communities.",
+        promise: "There are no ads, no fake reports, and no data sold. Every submission is real.",
+        backHome: "← Back to Home"
+      },
+      es: { 
+        aboutTitle: "Acerca de YearnaZ",
+        mission: "YearnaZ es una red gratuita de objetos perdidos y encontrados impulsada por la comunidad.",
+        vision: "Creemos que la amabilidad cotidiana —como devolver una billetera perdida o reportar un teléfono encontrado— construye comunidades más fuertes.",
+        promise: "No hay anuncios, informes falsos ni venta de datos. Cada envío es real.",
+        backHome: "← Volver al Inicio"
+      },
+      fr: { 
+        aboutTitle: "À propos de YearnaZ",
+        mission: "YearnaZ est un réseau gratuit de trouvailles et d'objets perdus géré par la communauté.",
+        vision: "Nous croyons que la gentillesse quotidienne — comme rendre un portefeuille perdu ou signaler un téléphone trouvé — renforce les communautés.",
+        promise: "Il n'y a pas de publicité, de faux rapports ni de vente de données. Chaque soumission est réelle.",
+        backHome: "← Retour à l'accueil"
+      },
+      de: { 
+        aboutTitle: "Über YearnaZ",
+        mission: "YearnaZ ist ein kostenloses, gemeinschaftlich betriebenes Fundbüro-Netzwerk.",
+        vision: "Wir glauben, dass alltägliche Freundlichkeit — wie die Rückgabe einer verlorenen Brieftasche oder das Melden eines gefundenen Telefons — stärkere Gemeinschaften schafft.",
+        promise: "Es gibt keine Werbung, keine gefälschten Berichte und keine Datenverkäufe. Jede Meldung ist echt.",
+        backHome: "← Zurück zur Startseite"
+      },
+      pt: { 
+        aboutTitle: "Sobre o YearnaZ",
+        mission: "YearnaZ é uma rede gratuita de achados e perdidos impulsionada pela comunidade.",
+        vision: "Acreditamos que a gentileza do dia a dia — como devolver uma carteira perdida ou relatar um telefone encontrado — constrói comunidades mais fortes.",
+        promise: "Não há anúncios, relatórios falsos ou venda de dados. Cada envio é real.",
+        backHome: "← Voltar para Início"
+      },
+      it: { 
+        aboutTitle: "Chi siamo",
+        mission: "YearnaZ è una rete gratuita di oggetti smarriti e ritrovati gestita dalla comunità.",
+        vision: "Crediamo che la gentilezza quotidiana — come restituire un portafoglio smarrito o segnalare un telefono trovato — costruisca comunità più forti.",
+        promise: "Non ci sono pubblicità, segnalazioni false o vendita di dati. Ogni segnalazione è reale.",
+        backHome: "← Torna alla Home"
+      },
+      nl: { 
+        aboutTitle: "Over YearnaZ",
+        mission: "YearnaZ is een gratis, door de gemeenschap gedreven netwerk voor verloren en gevonden voorwerpen.",
+        vision: "Wij geloven dat alledaagse vriendelijkheid — zoals het teruggeven van een verloren portemonnee of het melden van een gevonden telefoon — sterkere gemeenschappen creëert.",
+        promise: "Er zijn geen advertenties, valse meldingen of verkoop van gegevens. Elke melding is echt.",
+        backHome: "← Terug naar home"
+      },
+      ru: { 
+        aboutTitle: "О YearnaZ",
+        mission: "YearnaZ — это бесплатная сеть для поиска потерянных вещей, управляемая сообществом.",
+        vision: "Мы верим, что повседневная доброта — возврат потерянного кошелька или сообщение о найденном телефоне — укрепляет сообщества.",
+        promise: "Нет рекламы, поддельных отчетов и продажи данных. Каждый отчет реален.",
+        backHome: "← Вернуться на главную"
+      },
+      ja: { 
+        aboutTitle: "YearnaZについて",
+        mission: "YearnaZは、コミュニティ主導の無料の紛失物ネットワークです。",
+        vision: "財布を返したり、見つけたスマホを報告したりする日常の親切が、より強いコミュニティを築くと信じています。",
+        promise: "広告も、偽の報告も、データの販売もありません。すべての報告は本物です。",
+        backHome: "← ホームに戻る"
+      },
+      ko: { 
+        aboutTitle: "YearnaZ 소개",
+        mission: "YearnaZ는 커뮤니티 기반의 무료 분실물 네트워크입니다.",
+        vision: "지갑을 돌려주거나 발견한 휴대폰을 신고하는 일상의 친절이 더 강한 커뮤니티를 만든다고 믿습니다.",
+        promise: "광고, 허위 신고, 데이터 판매가 없습니다. 모든 신고는 실제입니다.",
+        backHome: "← 홈으로 돌아가기"
+      },
+      zh: { 
+        aboutTitle: "关于 YearnaZ",
+        mission: "YearnaZ 是一个免费的、由社区驱动的失物招领网络。",
+        vision: "我们相信，日常的善意——比如归还丢失的钱包或报告找到的手机——能构建更强大的社区。",
+        promise: "没有广告、虚假报告或数据销售。每份提交都是真实的。",
+        backHome: "← 返回首页"
+      },
+      ar: { 
+        aboutTitle: "حول YearnaZ",
+        mission: "YearnaZ هي شبكة مجانية لإعادة الأشياء المفقودة يديرها المجتمع.",
+        vision: "نحن نؤمن أن اللطف اليومي — مثل إرجاع محفظة مفقودة أو الإبلاغ عن هاتف وُجد — يبني مجتمعات أقوى.",
+        promise: "لا توجد إعلانات أو تقارير مزيفة أو بيع بيانات. كل تقرير حقيقي.",
+        backHome: "← العودة إلى الصفحة الرئيسية"
+      }
+    };
+
+    function applyLanguage(lang) {
+      const t = translations[lang] || translations.en;
+      document.querySelectorAll('[data-i18n]').forEach(el => {
+        const key = el.getAttribute('data-i18n');
+        if (t[key]) el.textContent = t[key];
+      });
+      localStorage.setItem('lang', lang);
+    }
+
+    const savedLang = localStorage.getItem('lang') || navigator.language.split('-')[0] || 'en';
+    const lang = translations[savedLang] ? savedLang : 'en';
+    applyLanguage(lang);
+    document.getElementById('langSelect').value = lang;
+    document.getElementById('langSelect').addEventListener('change', e => applyLanguage(e.target.value));
+  </script>
 </body>
 </html>
