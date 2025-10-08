@@ -85,13 +85,57 @@
       margin: 0 auto 30px;
     }
 
-    /* Animated CTA Buttons */
+    /* Search Box */
+    .search-box {
+      background: var(--card-bg);
+      padding: 28px;
+      border-radius: 20px;
+      margin: 30px auto;
+      max-width: 520px;
+      box-shadow: 0 8px 24px rgba(79, 172, 254, 0.15);
+    }
+    input, .search-btn {
+      width: 100%;
+      padding: 16px;
+      margin: 10px 0;
+      border-radius: 16px;
+      border: 2px solid var(--border);
+      font-size: 1.1rem;
+      font-family: 'ClashGrotesk', sans-serif;
+    }
+    input {
+      background: var(--card-bg);
+      color: var(--text);
+    }
+    .search-btn {
+      background: linear-gradient(135deg, var(--primary), #4361ee);
+      color: white;
+      border: none;
+      font-weight: 700;
+      cursor: pointer;
+      box-shadow: 0 6px 16px rgba(79, 172, 254, 0.3);
+    }
+
+    /* Results */
+    #results {
+      margin-top: 20px;
+      text-align: left;
+    }
+    .result-item {
+      padding: 14px;
+      margin: 10px 0;
+      background: rgba(79, 172, 254, 0.05);
+      border-radius: 12px;
+      border-left: 4px solid var(--primary);
+    }
+
+    /* CTA Buttons */
     .cta-group {
       display: flex;
       flex-direction: column;
       gap: 16px;
       max-width: 400px;
-      margin: 0 auto 40px;
+      margin: 30px auto 0;
     }
     .btn {
       padding: 18px;
@@ -120,9 +164,6 @@
       transform: translateY(-4px);
       box-shadow: 0 10px 25px rgba(79, 172, 254, 0.4);
     }
-    .btn:active {
-      transform: translateY(0);
-    }
 
     /* Social Proof */
     .proof {
@@ -145,7 +186,7 @@
       margin: 0 10px;
     }
 
-    /* Animation: floating emoji */
+    /* Animation */
     @keyframes float {
       0%, 100% { transform: translateY(0); }
       50% { transform: translateY(-10px); }
@@ -156,7 +197,6 @@
       font-size: 1.4rem;
     }
 
-    /* Responsive */
     @media (min-width: 768px) {
       .cta-group { flex-direction: row; }
       .btn { max-width: 220px; }
@@ -191,6 +231,12 @@
         <h1>Lost something?<br><span class="emoji">😢</span> Someone’s got it.</h1>
         <p class="subtitle">Join 32,481 kind humans who return what’s lost. Reunite in minutes.</p>
 
+        <div class="search-box">
+          <input type="text" id="searchInput" placeholder="e.g., Black wallet, Silver AirPods">
+          <button class="search-btn" id="searchBtn">🔍 Search Lost Items</button>
+          <div id="results"></div>
+        </div>
+
         <div class="cta-group">
           <a href="report-lost.html" class="btn btn-primary">🔍 Find My Thing</a>
           <a href="report-found.html" class="btn btn-secondary">❤️ I Found Something</a>
@@ -213,7 +259,7 @@
   <!-- CRISP CHAT -->
   <script type="text/javascript">window.$crisp=[];window.CRISP_WEBSITE_ID="8b1ac106-f164-4b83-a0c6-e9e36a267cf5";(function(){d=document;s=d.createElement("script");s.src="https://client.crisp.chat/l.js";s.async=1;d.getElementsByTagName("head")[0].appendChild(s);})();</script>
 
-  <script>
+  <script type="module">
     // ===== THEME =====
     const themeBtn = document.getElementById('themeBtn');
     const isDark = localStorage.getItem('theme') === 'dark';
@@ -240,6 +286,8 @@
         hero1: "Lost something?", 
         hero2: "Someone’s got it.",
         subtitle: "Join 32,481 kind humans who return what’s lost. Reunite in minutes.",
+        searchPlaceholder: "e.g., Black wallet, Silver AirPods",
+        searchBtn: "🔍 Search Lost Items",
         cta1: "🔍 Find My Thing",
         cta2: "❤️ I Found Something"
       },
@@ -247,6 +295,8 @@
         hero1: "¿Perdiste algo?", 
         hero2: "Alguien lo tiene.",
         subtitle: "Únete a 32,481 personas amables que devuelven lo perdido. Reencuéntrate en minutos.",
+        searchPlaceholder: "ej. Billetera negra, AirPods plateados",
+        searchBtn: "🔍 Buscar Objetos Perdidos",
         cta1: "🔍 Encuentra Mi Cosa",
         cta2: "❤️ Encontré Algo"
       },
@@ -254,6 +304,8 @@
         hero1: "Perdu quelque chose ?", 
         hero2: "Quelqu’un l’a.",
         subtitle: "Rejoignez 32 481 personnes bienveillantes qui rendent ce qui est perdu. Réunissez-vous en minutes.",
+        searchPlaceholder: "ex. Portefeuille noir, AirPods argentés",
+        searchBtn: "🔍 Rechercher des objets perdus",
         cta1: "🔍 Trouve Mon Truc",
         cta2: "❤️ J’ai Trouvé Quelque Chose"
       },
@@ -261,6 +313,8 @@
         hero1: "Etwas verloren?", 
         hero2: "Jemand hat es.",
         subtitle: "Schließe dich 32.481 freundlichen Menschen an, die Verlorenes zurückgeben. Vereint in Minuten.",
+        searchPlaceholder: "z. B. Schwarze Brieftasche, Silberne AirPods",
+        searchBtn: "🔍 Verlorene Gegenstände suchen",
         cta1: "🔍 Finde Mein Ding",
         cta2: "❤️ Ich Habe Etwas Gefunden"
       },
@@ -268,6 +322,8 @@
         hero1: "Perdeu algo?", 
         hero2: "Alguém tem.",
         subtitle: "Junte-se a 32.481 pessoas gentis que devolvem o que foi perdido. Reencontre-se em minutos.",
+        searchPlaceholder: "ex. Carteira preta, AirPods prateados",
+        searchBtn: "🔍 Buscar Itens Perdidos",
         cta1: "🔍 Encontre Minha Coisa",
         cta2: "❤️ Encontrei Algo"
       },
@@ -275,6 +331,8 @@
         hero1: "Hai perso qualcosa?", 
         hero2: "Qualcuno ce l’ha.",
         subtitle: "Unisciti a 32.481 persone gentili che restituiscono ciò che è perso. Riunisciti in pochi minuti.",
+        searchPlaceholder: "es. Portafoglio nero, AirPods argentati",
+        searchBtn: "🔍 Cerca Oggetti Smarriti",
         cta1: "🔍 Trova La Mia Cosa",
         cta2: "❤️ Ho Trovato Qualcosa"
       },
@@ -282,6 +340,8 @@
         hero1: "Iets verloren?", 
         hero2: "Iemand heeft het.",
         subtitle: "Sluit je aan bij 32.481 vriendelijke mensen die verloren spullen teruggeven. Herenig in minuten.",
+        searchPlaceholder: "bijv. Zwarte portemonnee, Zilveren AirPods",
+        searchBtn: "🔍 Zoek Verloren Voorwerpen",
         cta1: "🔍 Vind Mijn Spul",
         cta2: "❤️ Ik Heb Iets Gevonden"
       },
@@ -289,6 +349,8 @@
         hero1: "Потеряли что-то?", 
         hero2: "Кто-то это нашел.",
         subtitle: "Присоединяйтесь к 32 481 добрым людям, которые возвращают потерянное. Воссоединяйтесь за минуты.",
+        searchPlaceholder: "напр., Черный кошелек, Серебряные AirPods",
+        searchBtn: "🔍 Поиск потерянных вещей",
         cta1: "🔍 Найди Мою Вещь",
         cta2: "❤️ Я Нашел Что-то"
       },
@@ -296,6 +358,8 @@
         hero1: "何かを無くしましたか？", 
         hero2: "誰かが持っています。",
         subtitle: "失くした物を返す32,481人の優しい仲間に参加しましょう。数分で再会できます。",
+        searchPlaceholder: "例: 黒い財布、シルバーのAirPods",
+        searchBtn: "🔍 紛失物を検索",
         cta1: "🔍 私の物を探して",
         cta2: "❤️ 見つけました"
       },
@@ -303,6 +367,8 @@
         hero1: "무언가를 잃어버리셨나요?", 
         hero2: "누군가 가지고 있어요.",
         subtitle: "잃어버린 물건을 돌려주는 32,481명의 친절한 사람들과 함께하세요. 몇 분 안에 재회하세요.",
+        searchPlaceholder: "예: 검정 지갑, 실버 에어팟",
+        searchBtn: "🔍 분실물 검색",
         cta1: "🔍 내 물건 찾기",
         cta2: "❤️ 무언가를 찾았어요"
       },
@@ -310,6 +376,8 @@
         hero1: "丢了东西？", 
         hero2: "有人捡到了。",
         subtitle: "加入32,481名归还失物的善良人群。几分钟内重聚。",
+        searchPlaceholder: "例如：黑色钱包，银色AirPods",
+        searchBtn: "🔍 搜索丢失物品",
         cta1: "🔍 找回我的东西",
         cta2: "❤️ 我捡到了东西"
       },
@@ -317,6 +385,8 @@
         hero1: "فقدت شيئًا؟", 
         hero2: "الشخص ما زال يملكه.",
         subtitle: "انضم إلى 32,481 شخصًا لطفاء يعيدون الأشياء المفقودة. التقيا في دقائق.",
+        searchPlaceholder: "مثل: محفظة سوداء، AirPods فضية",
+        searchBtn: "🔍 البحث عن أشياء مفقودة",
         cta1: "🔍 اعثر على شي",
         cta2: "❤️ وجدت شيئًا"
       }
@@ -326,6 +396,8 @@
       const t = translations[lang] || translations.en;
       document.querySelector('h1').innerHTML = `${t.hero1}<br><span class="emoji">😢</span> ${t.hero2}`;
       document.querySelector('.subtitle').textContent = t.subtitle;
+      document.getElementById('searchInput').placeholder = t.searchPlaceholder;
+      document.getElementById('searchBtn').textContent = t.searchBtn;
       document.querySelectorAll('.btn')[0].innerHTML = t.cta1;
       document.querySelectorAll('.btn')[1].innerHTML = t.cta2;
       localStorage.setItem('lang', lang);
@@ -336,6 +408,44 @@
     updateLang(lang);
     document.getElementById('langSelect').value = lang;
     document.getElementById('langSelect').addEventListener('change', e => updateLang(e.target.value));
+
+    // ===== SUPABASE SEARCH =====
+    import { createClient } from 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js/+esm';
+
+    const supabase = createClient(
+      'https://jcbylpynjwpkxkoxkphd.supabase.co',
+      'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImpjYnlscHluandwa3hrb3hrcGhkIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTk2OTg0MzMsImV4cCI6MjA3NTI3NDQzM30.inEep6kgr2sysdTg3SoVtwHiEr_u7nmAWQ1_BwGHJDE'
+    );
+
+    document.getElementById('searchBtn').addEventListener('click', async () => {
+      const query = document.getElementById('searchInput').value.trim();
+      if (!query) return;
+
+      const { data, error } = await supabase
+        .from('reports')
+        .select('item_name, location, description, type')
+        .or(`item_name.ilike.%${query}%,description.ilike.%${query}%`)
+        .limit(5);
+
+      const resultsDiv = document.getElementById('results');
+      if (error) {
+        resultsDiv.innerHTML = `<p style="color:var(--accent);">❌ Error: ${error.message}</p>`;
+        return;
+      }
+
+      if (data.length === 0) {
+        resultsDiv.innerHTML = '<p>No matches found. Be the first to report!</p>';
+        return;
+      }
+
+      resultsDiv.innerHTML = data.map(item => 
+        `<div class="result-item">
+          <strong>${item.item_name}</strong> <em>(${item.type})</em><br>
+          ${item.description}<br>
+          <small>📍 ${item.location}</small>
+        </div>`
+      ).join('');
+    });
   </script>
 </body>
 </html>
