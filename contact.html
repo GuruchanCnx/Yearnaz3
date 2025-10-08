@@ -3,68 +3,97 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title data-i18n="contactTitle">Contact Support</title>
+  <title>Contact - YearnaZ</title>
+  <link href="https://fonts.googleapis.com/css2?family=ClashGrotesk:wght@400;600;700&display=swap" rel="stylesheet">
   <style>
     :root {
-      --bg: #f8fafc;
-      --text: #0f172a;
-      --card-bg: #ffffff;
-      --primary: #6e8efb;
+      --bg: #fdfcff;
+      --text: #1a1a2e;
+      --card-bg: white;
+      --primary: #4facfe;
       --accent: #ff6b6b;
-      --shadow: 0 4px 12px rgba(0,0,0,0.05);
+      --border: #f0f4ff;
     }
     [data-theme="dark"] {
-      --bg: #0f172a;
-      --text: #f8fafc;
-      --card-bg: #1e293b;
+      --bg: #0d0d1a;
+      --text: #f0f4ff;
+      --card-bg: #161625;
+      --border: #25253a;
     }
-
     * { margin: 0; padding: 0; box-sizing: border-box; }
     body {
-      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      font-family: 'ClashGrotesk', -apple-system, sans-serif;
       background: var(--bg);
       color: var(--text);
-      line-height: 1.6;
-      transition: background 0.3s, color 0.3s;
+      line-height: 1.5;
+      transition: background 0.3s;
     }
     .container { width: 90%; max-width: 800px; margin: 0 auto; padding: 20px; }
-
-    /* Nav */
     nav {
       display: flex;
       justify-content: space-between;
       align-items: center;
       padding: 16px 0;
-      border-bottom: 1px solid rgba(0,0,0,0.1);
+      border-bottom: 1px solid var(--border);
     }
-    .logo { font-size: 1.4rem; font-weight: 700; }
+    .logo { 
+      font-size: 1.6rem; 
+      font-weight: 700; 
+      background: linear-gradient(135deg, var(--primary), var(--accent));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
     .controls { display: flex; gap: 12px; }
     select, button {
-      padding: 6px 12px;
-      border-radius: 6px;
-      border: 1px solid rgba(0,0,0,0.1);
+      padding: 8px 14px;
+      border-radius: 12px;
+      border: 2px solid var(--border);
       background: var(--card-bg);
       color: var(--text);
+      font-weight: 600;
       cursor: pointer;
     }
-
-    /* Content */
     .content-box {
       background: var(--card-bg);
-      padding: 30px;
-      border-radius: 16px;
-      box-shadow: var(--shadow);
+      padding: 36px;
+      border-radius: 24px;
       margin: 40px auto;
       max-width: 600px;
       text-align: center;
+      box-shadow: 0 10px 30px rgba(79, 172, 254, 0.15);
     }
-    h1 { margin-bottom: 20px; }
-    p { margin: 12px 0; line-height: 1.6; }
+    h1 {
+      font-size: 2rem;
+      font-weight: 800;
+      margin-bottom: 20px;
+    }
+    p {
+      margin: 12px 0;
+      line-height: 1.6;
+      opacity: 0.9;
+    }
     a {
       display: inline-block;
-      margin-top: 20px;
+      margin-top: 24px;
       color: var(--primary);
       text-decoration: none;
+      font-weight: 600;
+    }
+    footer {
+      text-align: center;
+      padding: 30px 0;
+      opacity: 0.8;
+      font-size: 0.9rem;
+      border-top: 1px solid var(--border);
+      margin-top: 40px;
+    }
+    footer a {
+      color: var(--primary);
+      text-decoration: none;
+      margin: 0 10px;
     }
   </style>
 </head>
@@ -93,25 +122,30 @@
 
     <main>
       <div class="content-box">
-        <h1 data-i18n="contactTitle">Contact Support</h1>
-        <p data-i18n="needHelp">Need help with a report? Found a bug? Want to partner with us?</p>
-        <p data-i18n="chatInstruction">Click the chat icon in the bottom-right corner to speak with a real person.</p>
-        <p data-i18n="responseTime">We respond within 24 hours.</p>
-        <a href="index.html" data-i18n="backHome">← Back to Home</a>
+        <h1 id="title">Contact Support</h1>
+        <p id="p1">Need help with a report? Found a bug? Want to partner with us?</p>
+        <p id="p2">Click the chat icon in the bottom-right corner to speak with a real person.</p>
+        <p id="p3">We respond within 24 hours.</p>
+        <a href="index.html" id="backLink">← Back to Home</a>
       </div>
     </main>
+
+    <footer>
+      <p>© 2025 YearnaZ. Kindness, powered by community.</p>
+      <p>
+        <a href="about.html">About</a> • 
+        <a href="privacy.html">Privacy</a> • 
+        <a href="contact.html">Contact</a> • 
+        <a href="hero-wall.html">Hero Wall</a>
+      </p>
+    </footer>
   </div>
 
   <!-- CRISP CHAT -->
-  <script type="text/javascript">
-    window.$crisp = []; window.CRISP_WEBSITE_ID = "your-crisp-id";
-    (function() { d = document; s = d.createElement("script");
-    s.src = "https://client.crisp.chat/l.js"; s.async = 1;
-    d.getElementsByTagName("head")[0].appendChild(s); })();
-  </script>
+  <script type="text/javascript">window.$crisp=[];window.CRISP_WEBSITE_ID="8b1ac106-f164-4b83-a0c6-e9e36a267cf5";(function(){d=document;s=d.createElement("script");s.src="https://client.crisp.chat/l.js";s.async=1;d.getElementsByTagName("head")[0].appendChild(s);})();</script>
 
-  <script type="module">
-    // ===== THEME =====
+  <script>
+    // Theme Toggle
     const themeBtn = document.getElementById('themeBtn');
     const isDark = localStorage.getItem('theme') === 'dark';
     if (isDark) {
@@ -131,108 +165,109 @@
       }
     });
 
-    // ===== LANGUAGE =====
+    // Multilingual Support
     const translations = {
       en: { 
-        contactTitle: "Contact Support",
-        needHelp: "Need help with a report? Found a bug? Want to partner with us?",
-        chatInstruction: "Click the chat icon in the bottom-right corner to speak with a real person.",
-        responseTime: "We respond within 24 hours.",
-        backHome: "← Back to Home"
+        title: "Contact Support",
+        p1: "Need help with a report? Found a bug? Want to partner with us?",
+        p2: "Click the chat icon in the bottom-right corner to speak with a real person.",
+        p3: "We respond within 24 hours.",
+        back: "← Back to Home"
       },
       es: { 
-        contactTitle: "Contactar Soporte",
-        needHelp: "¿Necesita ayuda con un informe? ¿Encontró un error? ¿Quiere asociarse con nosotros?",
-        chatInstruction: "Haga clic en el ícono de chat en la esquina inferior derecha para hablar con una persona real.",
-        responseTime: "Respondemos en 24 horas.",
-        backHome: "← Volver al Inicio"
+        title: "Contactar Soporte",
+        p1: "¿Necesita ayuda con un informe? ¿Encontró un error? ¿Quiere asociarse con nosotros?",
+        p2: "Haga clic en el ícono de chat en la esquina inferior derecha para hablar con una persona real.",
+        p3: "Respondemos en 24 horas.",
+        back: "← Volver al Inicio"
       },
       fr: { 
-        contactTitle: "Contacter le support",
-        needHelp: "Besoin d'aide pour un rapport ? Avez-vous trouvé un bug ? Souhaitez-vous collaborer avec nous ?",
-        chatInstruction: "Cliquez sur l'icône de chat en bas à droite pour parler à une personne réelle.",
-        responseTime: "Nous répondons sous 24 heures.",
-        backHome: "← Retour à l'accueil"
+        title: "Contacter le support",
+        p1: "Besoin d'aide pour un rapport ? Avez-vous trouvé un bug ? Souhaitez-vous collaborer avec nous ?",
+        p2: "Cliquez sur l'icône de chat en bas à droite pour parler à une personne réelle.",
+        p3: "Nous répondons sous 24 heures.",
+        back: "← Retour à l'accueil"
       },
       de: { 
-        contactTitle: "Support kontaktieren",
-        needHelp: "Brauchen Sie Hilfe bei einem Bericht? Haben Sie einen Fehler gefunden? Möchten Sie mit uns zusammenarbeiten?",
-        chatInstruction: "Klicken Sie auf das Chat-Symbol in der unteren rechten Ecke, um mit einer echten Person zu sprechen.",
-        responseTime: "Wir antworten innerhalb von 24 Stunden.",
-        backHome: "← Zurück zur Startseite"
+        title: "Support kontaktieren",
+        p1: "Brauchen Sie Hilfe bei einem Bericht? Haben Sie einen Fehler gefunden? Möchten Sie mit uns zusammenarbeiten?",
+        p2: "Klicken Sie auf das Chat-Symbol in der unteren rechten Ecke, um mit einer echten Person zu sprechen.",
+        p3: "Wir antworten innerhalb von 24 Stunden.",
+        back: "← Zurück zur Startseite"
       },
       pt: { 
-        contactTitle: "Contate o Suporte",
-        needHelp: "Precisa de ajuda com um relatório? Encontrou um erro? Quer fazer parceria conosco?",
-        chatInstruction: "Clique no ícone de chat no canto inferior direito para falar com uma pessoa real.",
-        responseTime: "Respondemos em 24 horas.",
-        backHome: "← Voltar para Início"
+        title: "Contate o Suporte",
+        p1: "Precisa de ajuda com um relatório? Encontrou um erro? Quer fazer parceria conosco?",
+        p2: "Clique no ícone de chat no canto inferior direito para falar com uma pessoa real.",
+        p3: "Respondemos em 24 horas.",
+        back: "← Voltar para Início"
       },
       it: { 
-        contactTitle: "Contatta il Supporto",
-        needHelp: "Hai bisogno di aiuto con un rapporto? Hai trovato un bug? Vuoi collaborare con noi?",
-        chatInstruction: "Clicca sull'icona della chat nell'angolo in basso a destra per parlare con una persona reale.",
-        responseTime: "Rispondiamo entro 24 ore.",
-        backHome: "← Torna alla Home"
+        title: "Contatta il Supporto",
+        p1: "Hai bisogno di aiuto con un rapporto? Hai trovato un bug? Vuoi collaborare con noi?",
+        p2: "Clicca sull'icona della chat nell'angolo in basso a destra per parlare con una persona reale.",
+        p3: "Rispondiamo entro 24 ore.",
+        back: "← Torna alla Home"
       },
       nl: { 
-        contactTitle: "Contacteer Support",
-        needHelp: "Hulp nodig met een rapport? Een fout gevonden? Wil je samenwerken met ons?",
-        chatInstruction: "Klik op het chatpictogram in de rechterbenedenhoek om te praten met een echte persoon.",
-        responseTime: "We reageren binnen 24 uur.",
-        backHome: "← Terug naar home"
+        title: "Contacteer Support",
+        p1: "Hulp nodig met een rapport? Een fout gevonden? Wil je samenwerken met ons?",
+        p2: "Klik op het chatpictogram in de rechterbenedenhoek om te praten met een echte persoon.",
+        p3: "We reageren binnen 24 uur.",
+        back: "← Terug naar home"
       },
       ru: { 
-        contactTitle: "Связаться со службой поддержки",
-        needHelp: "Нужна помощь с отчетом? Нашли баг? Хотите стать партнером?",
-        chatInstruction: "Нажмите на значок чата в правом нижнем углу, чтобы поговорить с реальным человеком.",
-        responseTime: "Мы отвечаем в течение 24 часов.",
-        backHome: "← Вернуться на главную"
+        title: "Связаться со службой поддержки",
+        p1: "Нужна помощь с отчетом? Нашли баг? Хотите стать партнером?",
+        p2: "Нажмите на значок чата в правом нижнем углу, чтобы поговорить с реальным человеком.",
+        p3: "Мы отвечаем в течение 24 часов.",
+        back: "← Вернуться на главную"
       },
       ja: { 
-        contactTitle: "サポートに連絡",
-        needHelp: "レポートに関するお手伝いが必要ですか？バグを見つけましたか？私たちと提携したいですか？",
-        chatInstruction: "右下隅のチャットアイコンをクリックして、実際の人と話してください。",
-        responseTime: "24時間以内に返信します。",
-        backHome: "← ホームに戻る"
+        title: "サポートに連絡",
+        p1: "レポートに関するお手伝いが必要ですか？バグを見つけましたか？私たちと提携したいですか？",
+        p2: "右下隅のチャットアイコンをクリックして、実際の人と話してください。",
+        p3: "24時間以内に返信します。",
+        back: "← ホームに戻る"
       },
       ko: { 
-        contactTitle: "지원팀 문의",
-        needHelp: "보고서 관련 도움이 필요하신가요? 버그를 찾으셨나요? 우리와 협력하고 싶으신가요?",
-        chatInstruction: "오른쪽 하단 모서리의 채팅 아이콘을 클릭하여 실제 사람과 대화하세요.",
-        responseTime: "24시간 이내에 답변드립니다.",
-        backHome: "← 홈으로 돌아가기"
+        title: "지원팀 문의",
+        p1: "보고서 관련 도움이 필요하신가요? 버그를 찾으셨나요? 우리와 협력하고 싶으신가요?",
+        p2: "오른쪽 하단 모서리의 채팅 아이콘을 클릭하여 실제 사람과 대화하세요.",
+        p3: "24시간 이내에 답변드립니다.",
+        back: "← 홈으로 돌아가기"
       },
       zh: { 
-        contactTitle: "联系支持",
-        needHelp: "需要报告帮助？发现错误？想与我们合作？",
-        chatInstruction: "点击右下角的聊天图标，与真人对话。",
-        responseTime: "我们会在24小时内回复。",
-        backHome: "← 返回首页"
+        title: "联系支持",
+        p1: "需要报告帮助？发现错误？想与我们合作？",
+        p2: "点击右下角的聊天图标，与真人对话。",
+        p3: "我们会在24小时内回复。",
+        back: "← 返回首页"
       },
       ar: { 
-        contactTitle: "تواصل مع الدعم",
-        needHelp: "تحتاج مساعدة في تقرير؟ وجدت خطأ؟ تريد الشراكة معنا؟",
-        chatInstruction: "انقر على أيقونة الدردشة في الزاوية اليمنى السفلية للتحدث مع شخص حقيقي.",
-        responseTime: "نحن نرد خلال 24 ساعة.",
-        backHome: "← العودة إلى الصفحة الرئيسية"
+        title: "تواصل مع الدعم",
+        p1: "تحتاج مساعدة في تقرير؟ وجدت خطأ؟ تريد الشراكة معنا؟",
+        p2: "انقر على أيقونة الدردشة في الزاوية اليمنى السفلية للتحدث مع شخص حقيقي.",
+        p3: "نحن نرد خلال 24 ساعة.",
+        back: "← العودة إلى الصفحة الرئيسية"
       }
     };
 
-    function applyLanguage(lang) {
+    function applyLang(lang) {
       const t = translations[lang] || translations.en;
-      document.querySelectorAll('[data-i18n]').forEach(el => {
-        const key = el.getAttribute('data-i18n');
-        if (t[key]) el.textContent = t[key];
-      });
+      document.getElementById('title').textContent = t.title;
+      document.getElementById('p1').textContent = t.p1;
+      document.getElementById('p2').textContent = t.p2;
+      document.getElementById('p3').textContent = t.p3;
+      document.getElementById('backLink').textContent = t.back;
       localStorage.setItem('lang', lang);
     }
 
     const savedLang = localStorage.getItem('lang') || navigator.language.split('-')[0] || 'en';
     const lang = translations[savedLang] ? savedLang : 'en';
-    applyLanguage(lang);
+    applyLang(lang);
     document.getElementById('langSelect').value = lang;
-    document.getElementById('langSelect').addEventListener('change', e => applyLanguage(e.target.value));
+    document.getElementById('langSelect').addEventListener('change', e => applyLang(e.target.value));
   </script>
 </body>
 </html>
