@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="en" id="htmlTag">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Hero Wall of Fame - YearnaZ</title>
+  <link href="https://fonts.googleapis.com/css2?family=ClashGrotesk:wght@400;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #fdfcff;
+      --text: #1a1a2e;
+      --card-bg: white;
+      --primary: #4facfe;
+      --accent: #ff6b6b;
+      --border: #f0f4ff;
+    }
+    [data-theme="dark"] {
+      --bg: #0d0d1a;
+      --text: #f0f4ff;
+      --card-bg: #161625;
+      --border: #25253a;
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: 'ClashGrotesk', -apple-system, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.5;
+      transition: background 0.3s;
+    }
+    .container { width: 90%; max-width: 900px; margin: 0 auto; padding: 20px; }
+    nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 16px 0;
+      border-bottom: 1px solid var(--border);
+    }
+    .logo { 
+      font-size: 1.6rem; 
+      font-weight: 700; 
+      background: linear-gradient(135deg, var(--primary), var(--accent));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .controls { display: flex; gap: 12px; }
+    select, button {
+      padding: 8px 14px;
+      border-radius: 12px;
+      border: 2px solid var(--border);
+      background: var(--card-bg);
+      color: var(--text);
+      font-weight: 600;
+      cursor: pointer;
+    }
+    .wall-header {
+      text-align: center;
+      margin: 40px 0;
+    }
+    .wall-header h1 {
+      font-size: 2.4rem;
+      font-weight: 800;
+      margin-bottom: 12px;
+    }
+    .wall-header p {
+      opacity: 0.9;
+      font-size: 1.2rem;
+    }
+    .hero-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 24px;
+      margin: 30px 0;
+    }
+    .hero-card {
+      background: var(--card-bg);
+      padding: 24px;
+      border-radius: 20px;
+      box-shadow: 0 6px 20px rgba(255, 107, 107, 0.15);
+      text-align: center;
+    }
+    .hero-card .emoji {
+      font-size: 2.5rem;
+      margin-bottom: 12px;
+      display: block;
+    }
+    .hero-card h3 {
+      font-size: 1.3rem;
+      margin-bottom: 8px;
+    }
+    .hero-card p {
+      font-size: 0.95rem;
+      opacity: 0.85;
+    }
+    footer {
+      text-align: center;
+      padding: 30px 0;
+      opacity: 0.8;
+      font-size: 0.9rem;
+      border-top: 1px solid var(--border);
+      margin-top: 40px;
+    }
+    footer a {
+      color: var(--primary);
+      text-decoration: none;
+      margin: 0 10px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <nav>
+      <div class="logo">YearnaZ</div>
+      <div class="controls">
+        <select id="langSelect">
+          <option value="en">English</option>
+          <option value="es">Español</option>
+          <option value="fr">Français</option>
+          <option value="de">Deutsch</option>
+          <option value="pt">Português</option>
+          <option value="it">Italiano</option>
+          <option value="nl">Nederlands</option>
+          <option value="ru">Русский</option>
+          <option value="ja">日本語</option>
+          <option value="ko">한국어</option>
+          <option value="zh">中文</option>
+          <option value="ar">العربية</option>
+        </select>
+        <button id="themeBtn">🌙</button>
+      </div>
+    </nav>
+
+    <main>
+      <div class="wall-header">
+        <h1>🏆 Hero Wall of Fame</h1>
+        <p>Celebrating kindness across the globe</p>
+      </div>
+
+      <div class="hero-grid" id="heroGrid">
+        <!-- Stories will be loaded from Supabase -->
+        <div class="hero-card">
+          <span class="emoji">❤️</span>
+          <h3>Maya R.</h3>
+          <p>“Found my passport at JFK in 8 minutes!”</p>
+        </div>
+        <div class="hero-card">
+          <span class="emoji">✨</span>
+          <h3>David T.</h3>
+          <p>“Returned 12 wallets this semester!”</p>
+        </div>
+        <div class="hero-card">
+          <span class="emoji">🌟</span>
+          <h3>Aisha K.</h3>
+          <p>“Reunited a child with their teddy bear.”</p>
+        </div>
+      </div>
+    </main>
+
+    <footer>
+      <p>© 2025 YearnaZ. Kindness, powered by community.</p>
+      <p>
+        <a href="index.html">Home</a> • 
+        <a href="report-found.html">Report Found</a> • 
+        <a href="contact.html">Contact</a>
+      </p>
+    </footer>
+  </div>
+
+  <!-- CRISP CHAT -->
+  <script type="text/javascript">
+    window.$crisp = []; window.CRISP_WEBSITE_ID = "YOUR_CRISP_ID";
+    (function() { d = document; s = d.createElement("script");
+    s.src = "https://client.crisp.chat/l.js"; s.async = 1;
+    d.getElementsByTagName("head")[0].appendChild(s); })();
+  </script>
+
+  <script type="module">
+    // Theme + Language (same as other pages)
+    const themeBtn = document.getElementById('themeBtn');
+    const isDark = localStorage.getItem('theme') === 'dark';
+    if (isDark) {
+      document.documentElement.setAttribute('data-theme', 'dark');
+      themeBtn.textContent = '☀️';
+    }
+    themeBtn.addEventListener('click', () => {
+      const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
+      if (isDark) {
+        document.documentElement.removeAttribute('data-theme');
+        localStorage.setItem('theme', 'light');
+        themeBtn.textContent = '🌙';
+      } else {
+        document.documentElement.setAttribute('data-theme', 'dark');
+        localStorage.setItem('theme', 'dark');
+        themeBtn.textContent = '☀️';
+      }
+    });
+
+    const translations = {
+      en: { title: "🏆 Hero Wall of Fame", subtitle: "Celebrating kindness across the globe" },
+      es: { title: "🏆 Muro de la Fama de Héroes", subtitle: "Celebrando la amabilidad en todo el mundo" },
+      fr: { title: "🏆 Mur de la Gloire des Héros", subtitle: "Célébrer la gentillesse à travers le monde" },
+      de: { title: "🏆 Helden-Ruhmeshalle", subtitle: "Feiern Sie Freundlichkeit auf der ganzen Welt" },
+      pt: { title: "🏆 Muro da Fama dos Heróis", subtitle: "Celebrando a gentileza pelo mundo" },
+      it: { title: "🏆 Muro della Fama degli Eroi", subtitle: "Celebrare la gentilezza in tutto il mondo" },
+      nl: { title: "🏆 Heldengalerij", subtitle: "Vriendelijkheid wereldwijd vieren" },
+      ru: { title: "🏆 Стена славы героев", subtitle: "Прославляем доброту по всему миру" },
+      ja: { title: "🏆 ヒーロー殿堂", subtitle: "世界中の親切を称える" },
+      ko: { title: "🏆 영웅 명예의 전당", subtitle: "전 세계의 친절을 기념합니다" },
+      zh: { title: "🏆 英雄名人堂", subtitle: "颂扬全球善意" },
+      ar: { title: "🏆 جدار مشاهير الأبطال", subtitle: "الاحتفال باللطف حول العالم" }
+    };
+
+    function applyLang(lang) {
+      const t = translations[lang] || translations.en;
+      document.querySelector('h1').textContent = t.title;
+      document.querySelector('.wall-header p').textContent = t.subtitle;
+      localStorage.setItem('lang', lang);
+    }
+
+    const savedLang = localStorage.getItem('lang') || navigator.language.split('-')[0] || 'en';
+    const lang = translations[savedLang] ? savedLang : 'en';
+    applyLang(lang);
+    document.getElementById('langSelect').value = lang;
+    document.getElementById('langSelect').addEventListener('change', e => applyLang(e.target.value));
+
+    // Optional: Load real stories from Supabase later
+    // For now, static examples are shown
+  </script>
+</body>
+</html>
