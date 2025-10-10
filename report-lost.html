@@ -20,32 +20,33 @@
       --card-bg: #161625;
       --border: #25253a;
     }
-
     * { margin: 0; padding: 0; box-sizing: border-box; }
     body {
       font-family: 'ClashGrotesk', -apple-system, sans-serif;
       background: var(--bg);
       color: var(--text);
       line-height: 1.5;
+      transition: background 0.3s;
     }
     .container { width: 90%; max-width: 800px; margin: 0 auto; padding: 20px; }
-
     nav {
       display: flex;
       justify-content: space-between;
       align-items: center;
       padding: 16px 0;
+      border-bottom: 1px solid var(--border);
     }
     .logo { 
-      font-size: 1.6rem; 
-      font-weight: 700; 
-      background: linear-gradient(135deg, var(--primary), var(--accent));
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
       display: flex;
       align-items: center;
       gap: 8px;
+      font-size: 1.6rem;
+      font-weight: 700;
+      background: linear-gradient(135deg, var(--primary), var(--accent));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
     }
+    .logo svg { width: 28px; height: 28px; }
     .controls { display: flex; gap: 12px; }
     select, button {
       padding: 8px 14px;
@@ -56,7 +57,6 @@
       font-weight: 600;
       cursor: pointer;
     }
-
     .form-box {
       background: var(--card-bg);
       padding: 36px;
@@ -75,21 +75,6 @@
       opacity: 0.9;
       margin-bottom: 28px;
       font-size: 1.1rem;
-    }
-    .camera-btn {
-      background: linear-gradient(135deg, var(--primary), #4361ee);
-      color: white;
-      border: none;
-      padding: 14px 24px;
-      border-radius: 16px;
-      font-weight: 700;
-      font-size: 1.1rem;
-      cursor: pointer;
-      margin-bottom: 24px;
-      display: inline-flex;
-      align-items: center;
-      gap: 10px;
-      box-shadow: 0 6px 16px rgba(79, 172, 254, 0.3);
     }
     input, textarea {
       width: 100%;
@@ -115,10 +100,6 @@
       margin-top: 10px;
       box-shadow: 0 6px 16px rgba(255, 107, 107, 0.3);
     }
-    .submit-btn:hover {
-      transform: scale(1.02);
-      transition: transform 0.2s;
-    }
     a {
       display: inline-block;
       margin-top: 24px;
@@ -126,34 +107,37 @@
       text-decoration: none;
       font-weight: 600;
     }
-
     footer {
       text-align: center;
-      padding: 40px 0 20px;
+      padding: 30px 0;
       opacity: 0.8;
       font-size: 0.9rem;
+      border-top: 1px solid var(--border);
+      margin-top: 40px;
     }
     footer a {
       color: var(--primary);
       text-decoration: none;
       margin: 0 10px;
     }
-
-    /* Emoji animation */
-    @keyframes pulse {
-      0%, 100% { transform: scale(1); }
-      50% { transform: scale(1.1); }
-    }
-    .emoji {
-      animation: pulse 2s infinite;
-      display: inline-block;
-    }
   </style>
 </head>
 <body>
   <div class="container">
     <nav>
-      <div class="logo">YearnaZ</div>
+      <div class="logo">
+        <svg viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <linearGradient id="logoGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" stop-color="#6e8efb" />
+              <stop offset="100%" stop-color="#a777e3" />
+            </linearGradient>
+          </defs>
+          <path d="M16 6 C22 6 26 10 26 16 C26 22 22 26 16 26 C10 26 6 22 6 16 C6 12 8 8 12 6" fill="none" stroke="url(#logoGrad)" stroke-width="2" stroke-linecap="round"/>
+          <path d="M20 22 L24 18 L20 14" fill="none" stroke="url(#logoGrad)" stroke-width="2" stroke-linejoin="round"/>
+        </svg>
+        YearnaZ
+      </div>
       <div class="controls">
         <select id="langSelect">
           <option value="en">English</option>
@@ -175,20 +159,14 @@
 
     <main>
       <div class="form-box">
-        <h1><span class="emoji">😢</span> What did you lose?</h1>
-        <p class="subtitle">Don’t panic. Someone kind probably found it.</p>
-
-        <button class="camera-btn" onclick="alert('📸 Camera access coming soon! For now, describe it below.')">
-          📸 Snap It
-        </button>
-
+        <h1>Report a Lost Item</h1>
+        <p>We’ll help you find it. Fill out the details below.</p>
         <form id="reportForm">
-          <input type="text" id="item_name" placeholder="e.g., Black wallet with red strap" required>
-          <input type="text" id="location" placeholder="e.g., JFK Terminal 4, Main Library" required>
-          <textarea id="description" placeholder="Unique details: scratches, contents, brand..." rows="4" required></textarea>
-          <button type="submit" class="submit-btn">📤 Send to the Kindness Network</button>
+          <input type="text" id="item_name" placeholder="Item name" required>
+          <input type="text" id="location" placeholder="Location" required>
+          <textarea id="description" placeholder="Description" rows="4" required></textarea>
+          <button type="submit" class="submit-btn">Submit Report</button>
         </form>
-
         <a href="index.html">← Back to Home</a>
       </div>
     </main>
@@ -204,10 +182,15 @@
   </div>
 
   <!-- CRISP CHAT -->
-  <script type="text/javascript">window.$crisp=[];window.CRISP_WEBSITE_ID="8b1ac106-f164-4b83-a0c6-e9e36a267cf5";(function(){d=document;s=d.createElement("script");s.src="https://client.crisp.chat/l.js";s.async=1;d.getElementsByTagName("head")[0].appendChild(s);})();</script>
+  <script type="text/javascript">
+    window.$crisp = []; window.CRISP_WEBSITE_ID = "YOUR_CRISP_ID";
+    (function() { d = document; s = d.createElement("script");
+    s.src = "https://client.crisp.chat/l.js"; s.async = 1;
+    d.getElementsByTagName("head")[0].appendChild(s); })();
+  </script>
 
   <script type="module">
-    // ===== THEME =====
+    // Theme Toggle
     const themeBtn = document.getElementById('themeBtn');
     const isDark = localStorage.getItem('theme') === 'dark';
     if (isDark) {
@@ -227,33 +210,18 @@
       }
     });
 
-    // ===== SUPABASE SUBMIT =====
+    // SUPABASE INTEGRATION
     import { createClient } from 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js/+esm';
-
-    const supabase = createClient(
-      'https://jcbylpynjwpkxkoxkphd.supabase.co',
-      'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImpjYnlscHluandwa3hrb3hrcGhkIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTk2OTg0MzMsImV4cCI6MjA3NTI3NDQzM30.inEep6kgr2sysdTg3SoVtwHiEr_u7nmAWQ1_BwGHJDE'
-    );
+    const supabase = createClient('YOUR_SUPABASE_URL', 'YOUR_SUPABASE_ANON_KEY');
 
     document.getElementById('reportForm').addEventListener('submit', async (e) => {
       e.preventDefault();
-      
-      const report = {
-        type: 'lost',
+      const { error } = await supabase.from('reports').insert([{
         item_name: document.getElementById('item_name').value,
         location: document.getElementById('location').value,
         description: document.getElementById('description').value
-      };
-
-      const { error } = await supabase.from('reports').insert([report]);
-      
-      if (error) {
-        alert('❌ Oops! ' + error.message);
-      } else {
-        // Confetti effect
-        alert('✅ Sent! You’re in the kindness network. We’ll DM you if found.');
-        document.getElementById('reportForm').reset();
-      }
+      }]);
+      alert(error ? '❌ ' + error.message : '✅ Report submitted!');
     });
   </script>
 </body>
