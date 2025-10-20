@@ -159,15 +159,15 @@
 
     <main>
       <div class="form-box">
-        <h1>Report a Lost Item</h1>
-        <p>We’ll help you find it. Fill out the details below.</p>
+        <h1 id="title">Report a Lost Item</h1>
+        <p id="subtitle">We’ll help you find it. Fill out the details below.</p>
         <form id="reportForm">
           <input type="text" id="item_name" placeholder="Item name" required>
           <input type="text" id="location" placeholder="Location" required>
           <textarea id="description" placeholder="Description" rows="4" required></textarea>
-          <button type="submit" class="submit-btn">Submit Report</button>
+          <button type="submit" class="submit-btn" id="submitBtn">Submit Report</button>
         </form>
-        <a href="index.html">← Back to Home</a>
+        <a href="index.html" id="backLink">← Back to Home</a>
       </div>
     </main>
 
@@ -176,7 +176,8 @@
       <p>
         <a href="about.html">About</a> • 
         <a href="privacy.html">Privacy</a> • 
-        <a href="contact.html">Contact</a>
+        <a href="contact.html">Contact</a> • 
+        <a href="hero-wall.html">Hero Wall</a>
       </p>
     </footer>
   </div>
@@ -190,7 +191,6 @@
   </script>
 
   <script type="module">
-    // Theme Toggle
     const themeBtn = document.getElementById('themeBtn');
     const isDark = localStorage.getItem('theme') === 'dark';
     if (isDark) {
@@ -210,13 +210,46 @@
       }
     });
 
-    // SUPABASE INTEGRATION
+    const translations = {
+      en: { title: "Report a Lost Item", subtitle: "We’ll help you find it. Fill out the details below.", item: "Item name", location: "Location", desc: "Description", submit: "Submit Report", back: "← Back to Home" },
+      es: { title: "Reportar un Artículo Perdido", subtitle: "Te ayudaremos a encontrarlo. Completa los detalles a continuación.", item: "Nombre del artículo", location: "Ubicación", desc: "Descripción", submit: "Enviar Reporte", back: "← Volver al Inicio" },
+      fr: { title: "Signaler un objet perdu", subtitle: "Nous vous aiderons à le retrouver. Remplissez les détails ci-dessous.", item: "Nom de l'objet", location: "Emplacement", desc: "Description", submit: "Soumettre le rapport", back: "← Retour à l'accueil" },
+      de: { title: "Verlorenen Gegenstand melden", subtitle: "Wir helfen Ihnen, ihn zu finden. Füllen Sie die Details unten aus.", item: "Gegenstandsname", location: "Standort", desc: "Beschreibung", submit: "Bericht senden", back: "← Zurück zur Startseite" },
+      pt: { title: "Relatar um Item Perdido", subtitle: "Ajudaremos você a encontrá-lo. Preencha os detalhes abaixo.", item: "Nome do item", location: "Localização", desc: "Descrição", submit: "Enviar Relatório", back: "← Voltar para Início" },
+      it: { title: "Segnala un oggetto smarrito", subtitle: "Ti aiuteremo a trovarlo. Compila i dettagli qui sotto.", item: "Nome oggetto", location: "Posizione", desc: "Descrizione", submit: "Invia Segnalazione", back: "← Torna alla Home" },
+      nl: { title: "Meld een verloren voorwerp", subtitle: "We helpen je het te vinden. Vul hieronder de gegevens in.", item: "Naam voorwerp", location: "Locatie", desc: "Beschrijving", submit: "Rapport verzenden", back: "← Terug naar home" },
+      ru: { title: "Сообщить о потере вещи", subtitle: "Мы поможем вам найти её. Заполните данные ниже.", item: "Название предмета", location: "Местоположение", desc: "Описание", submit: "Отправить отчет", back: "← Вернуться на главную" },
+      ja: { title: "紛失物を報告", subtitle: "見つけるお手伝いをします。以下の詳細を入力してください。", item: "アイテム名", location: "場所", desc: "説明", submit: "報告を送信", back: "← ホームに戻る" },
+      ko: { title: "분실물 신고", subtitle: "찾는 것을 도와드리겠습니다. 아래에 세부 정보를 입력하세요.", item: "물품 이름", location: "위치", desc: "설명", submit: "신고 제출", back: "← 홈으로 돌아가기" },
+      zh: { title: "报告丢失物品", subtitle: "我们将帮您找回。请填写以下详细信息。", item: "物品名称", location: "位置", desc: "描述", submit: "提交报告", back: "← 返回首页" },
+      ar: { title: "الإبلاغ عن عنصر مفقود", subtitle: "سنساعدك في العثور عليه. املأ التفاصيل أدناه.", item: "اسم العنصر", location: "الموقع", desc: "الوصف", submit: "إرسال التقرير", back: "← العودة إلى الصفحة الرئيسية" }
+    };
+
+    function applyLang(lang) {
+      const t = translations[lang] || translations.en;
+      document.getElementById('title').textContent = t.title;
+      document.getElementById('subtitle').textContent = t.subtitle;
+      document.getElementById('item_name').placeholder = t.item;
+      document.getElementById('location').placeholder = t.location;
+      document.getElementById('description').placeholder = t.desc;
+      document.getElementById('submitBtn').textContent = t.submit;
+      document.getElementById('backLink').textContent = t.back;
+      localStorage.setItem('lang', lang);
+    }
+
+    const savedLang = localStorage.getItem('lang') || navigator.language.split('-')[0] || 'en';
+    const lang = translations[savedLang] ? savedLang : 'en';
+    applyLang(lang);
+    document.getElementById('langSelect').value = lang;
+    document.getElementById('langSelect').addEventListener('change', e => applyLang(e.target.value));
+
     import { createClient } from 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js/+esm';
     const supabase = createClient('YOUR_SUPABASE_URL', 'YOUR_SUPABASE_ANON_KEY');
 
     document.getElementById('reportForm').addEventListener('submit', async (e) => {
       e.preventDefault();
       const { error } = await supabase.from('reports').insert([{
+        type: 'lost',
         item_name: document.getElementById('item_name').value,
         location: document.getElementById('location').value,
         description: document.getElementById('description').value
